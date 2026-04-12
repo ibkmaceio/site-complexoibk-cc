@@ -1,0 +1,327 @@
+/* line 1, ../sass/header.scss */
+body {
+  font-family: 'PT Sans Narrow', sans-serif;
+  background-color: #eeeeee;
+}
+
+/* line 6, ../sass/header.scss */
+a:hover {
+  text-decoration: none;
+}
+
+/* line 10, ../sass/header.scss */
+.tira-padding {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/* line 14, ../sass/header.scss */
+.tira-padding-left {
+  padding-left: 0px;
+}
+
+/* line 17, ../sass/header.scss */
+.tira-padding-right {
+  padding-right: 0px;
+}
+
+/* line 21, ../sass/header.scss */
+header {
+  background-color: #eeeeee;
+}
+/* line 23, ../sass/header.scss */
+header .top {
+  padding-top: 20px;
+}
+/* line 26, ../sass/header.scss */
+header .top .logo img {
+  width: 100%;
+}
+/* line 30, ../sass/header.scss */
+header .top .info-contato-header {
+  text-align: right;
+  color: #c8b387;
+}
+/* line 33, ../sass/header.scss */
+header .top .info-contato-header h6 {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 4px;
+    letter-spacing: .3px !important;
+}
+/* line 36, ../sass/header.scss */
+header .top .info-contato-header h6 strong {
+  font-weight: 600;
+}
+/* line 41, ../sass/header.scss */
+header .top .social-header {
+  border-left: 1px dotted #ccc;
+  padding: 20px 0px 10px 0px;
+}
+/* line 44, ../sass/header.scss */
+header .top .social-header ul {
+  list-style: none;
+  margin-left: 0;
+}
+/* line 47, ../sass/header.scss */
+header .top .social-header ul li {
+  display: inline-block;
+  margin-right: 2px;
+}
+/* line 50, ../sass/header.scss */
+header .top .social-header ul li a {
+  color: #666666;
+}
+header .top .social-header ul li a:hover {
+  color: #5d1943;
+}
+/* line 52, ../sass/header.scss */
+header .top .social-header ul li a i {
+  font-size: 25px;
+}
+/* line 60, ../sass/header.scss */
+header .navbar-nav {
+  width: max-content;
+  margin: auto;
+  float: none;
+}
+/* line 65, ../sass/header.scss */
+header .navbar {
+  margin-bottom: 0;
+  padding-top: 20px;
+}
+/* line 69, ../sass/header.scss */
+header .navbar-default {
+    background-color: #eeeeee;
+    border: 0;
+    border-bottom: 6px solid #5d1943;
+    border-radius: 0;
+}
+
+/* line 75, ../sass/header.scss */
+.navbar-default .navbar-nav > li > a {
+  color: #666;
+  font-size: 18px;
+  transition: 0.3s;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 30px 20px 20px 20px;
+  margin-right: 0px;
+}
+
+/* line 83, ../sass/header.scss */
+.navbar-default .navbar-nav > li > a:hover {
+  background-color: #5d1943;
+  color: #ffffff;
+  transition: 0.3s;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.navbar-default .navbar-nav > li > a.active {
+  background-color: #5d1943;
+  color: #ffffff;
+  transition: 0.3s;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+/* line 90, ../sass/header.scss */
+.navbar-nav > li > .dropdown-menu {
+  min-width: 815px !important;
+  padding: 30px 20px;
+  top: 70px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.97);
+}
+
+/* line 96, ../sass/header.scss */
+.navbar-nav > li > .dropdown-menu h4 {
+  font-size: 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #562243;
+}
+
+/* line 103, ../sass/header.scss */
+.navbar-nav > li.drop-desktop {
+  display: block;
+}
+
+/* line 106, ../sass/header.scss */
+.navbar-nav > li.drop-mobile {
+  display: none;
+}
+
+/* line 111, ../sass/header.scss */
+.menu-hori {
+  float: left;
+  list-style: none;
+  margin-right: 0px !important;
+  -webkit-transition: all .2s ease;
+     -moz-transition: all .2s ease;
+      -ms-transition: all .2s ease;
+       -o-transition: all .2s ease;
+          transition: all .2s ease;
+}
+/* line 115, ../sass/header.scss */
+.menu-hori li a {
+  font-size: 18px;
+  color: #777777;
+  border-bottom: 3px solid transparent;
+  -webkit-transition: all .2s ease;
+     -moz-transition: all .2s ease;
+      -ms-transition: all .2s ease;
+       -o-transition: all .2s ease;
+          transition: all .2s ease;
+}
+/* line 119, ../sass/header.scss */
+.menu-hori li a:hover {
+  color: #5d1943;
+  border-bottom: 3px solid #5d1943;
+  -webkit-transition: all .2s ease;
+     -moz-transition: all .2s ease;
+      -ms-transition: all .2s ease;
+       -o-transition: all .2s ease;
+          transition: all .2s ease;
+}
+
+ul.menu-hori.menu-hori-2{
+  width: 70%;
+}
+
+ul.menu-hori.menu-hori-2 li{
+  display: inline-block;
+  width: 190px;
+  margin-right: 0;
+}
+
+.uk-sticky.uk-active {
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 0 10px 50px -20px #000;
+}
+
+.uk-sticky.uk-active ul.nav.navbar-nav li {
+  margin: 0px 0 0px;
+}
+
+.uk-sticky.uk-active ul.nav.navbar-nav li a.active,
+.uk-sticky.uk-active ul.nav.navbar-nav li a:hover,
+.uk-sticky.uk-active ul.nav.navbar-nav li a{
+  padding-top: 20px;
+  border-radius: 50px;
+}
+
+.uk-sticky.uk-active ul.nav.navbar-nav  .menu-hori li a {
+  font-size: 18px;
+  color: #777777;
+  border-bottom: 3px solid transparent;
+  border-radius: 0px;
+  -webkit-transition: all .2s ease;
+     -moz-transition: all .2s ease;
+      -ms-transition: all .2s ease;
+       -o-transition: all .2s ease;
+          transition: all .2s ease;
+}
+
+.uk-sticky.uk-active ul.nav.navbar-nav .menu-hori li a:hover {
+  color: #5d1943;
+  border-radius: 0px;
+  border-bottom: 3px solid #5d1943;
+  -webkit-transition: all .2s ease;
+     -moz-transition: all .2s ease;
+      -ms-transition: all .2s ease;
+       -o-transition: all .2s ease;
+          transition: all .2s ease;
+}
+
+
+@media screen and (max-width: 480px) {
+  /* line 126, ../sass/header.scss */
+  header, header .top .info-contato-header {
+    text-align: center;
+  }
+
+  /* line 129, ../sass/header.scss */
+  header .top .social-header {
+    border: 0;
+  }
+
+  /* line 132, ../sass/header.scss */
+  header .navbar-nav {
+    margin-left: 0;
+  }
+
+  /* line 135, ../sass/header.scss */
+  .navbar-default .navbar-nav > li > a {
+    padding-left: 15px;
+    padding: 10px;
+    text-align: left;
+  }
+
+  /* line 140, ../sass/header.scss */
+  .navbar-default .navbar-nav > li > a:hover {
+    border-radius: 0;
+  }
+
+  /* line 143, ../sass/header.scss */
+  .navbar-nav > li.drop-desktop {
+    display: none;
+  }
+
+  /* line 146, ../sass/header.scss */
+  .navbar-nav > li.drop-mobile {
+    display: block;
+  }
+
+  /* line 149, ../sass/header.scss */
+  .navbar-nav {
+    width: auto;
+    margin: none;
+    float: none;
+  }
+
+  /* line 154, ../sass/header.scss */
+  .navbar-nav > li {
+    width: 100%;
+  }
+
+  /* line 157, ../sass/header.scss */
+  .navbar-nav > li > .dropdown-menu {
+    min-width: auto !important;
+    padding: 30px 20px;
+    top: 70px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  /* line 163, ../sass/header.scss */
+  .navbar-nav > li > .dropdown-menu h4 {
+    font-size: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #562243;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+
+
+*/

@@ -1,0 +1,19 @@
+{
+  "name": "kainonia",
+  "version": "1.0.0",
+  "description": "Site Kainonia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Coop Desenvolvimento Web",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-compass": "^1.0.3",
+    "grunt-contrib-connect": "^0.10.1",
+    "grunt-contrib-csslint": "^0.4.0",
+    "grunt-contrib-livereload": "^0.1.2",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
