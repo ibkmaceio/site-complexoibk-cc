@@ -4,7 +4,7 @@
  * Se a rede falhar, mantém o videos.json existente.
  */
 
-import { writeFileSync, existsSync, readFileSync } from "fs";
+import { writeFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -72,15 +72,9 @@ try {
     fetchFeed(playlistUrl(PLAYLISTS.podcasts)),
   ]);
 
-  // Preserva o pinnedPodcastId definido manualmente
-  const existing = existsSync(OUTPUT)
-    ? JSON.parse(readFileSync(OUTPUT, "utf8"))
-    : {};
-
   const data = {
     ibk: ibk.slice(0, 5),
     pedro: pedro.slice(0, 5),
-    pinnedPodcastId: existing.pinnedPodcastId ?? podcasts[0]?.id ?? "",
     podcasts: podcasts.slice(0, 5),
     updatedAt: new Date().toISOString(),
   };
