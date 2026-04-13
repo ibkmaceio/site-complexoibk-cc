@@ -54,7 +54,7 @@ export default function TemaMesSection() {
           </div>
 
           {/* Cards de Valores */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {COPY.sobre.valores.map((v, i) => (
               <FadeIn key={v.titulo} delay={0.1 + i * 0.07} direction="left">
                 <motion.div

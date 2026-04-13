@@ -78,7 +78,7 @@ export default function DoacoesSection() {
           </div>
 
           {/* Grid bancos */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {DOACOES.bancos.map((banco, i) => (
               <FadeIn key={banco.banco} delay={i * 0.07} direction="left">
                 <div className="p-5 border border-white/10 rounded bg-ibk-dark-card hover:border-[#E84C1E]/30 transition-colors">

@@ -81,7 +81,7 @@ export default function SobreSection() {
           </FadeIn>
 
           <FadeIn delay={0.15} direction="left">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {COPY.sobre.valores.map((v) => (
                 <div
                   key={v.titulo}
