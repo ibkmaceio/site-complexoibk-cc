@@ -6,24 +6,26 @@ import { DOACOES } from "@/lib/data/mock";
 
 export default function DoacoesSection() {
   return (
-    <section className="relative overflow-hidden bg-[#080808] py-28 px-6 sm:px-10 lg:px-16 border-t border-white/5">
+    <section className="relative overflow-hidden bg-ibk-dark-deep py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
 
-      {/* Foto de fundo sutil */}
+      {/* Foto de fundo */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-10"
-        style={{ backgroundImage: "url('/assets/img/dizimos.jpg')" }}
+        className="absolute inset-0 bg-cover bg-center opacity-20"
+        style={{ backgroundImage: "url('/assets/img/dizimos.webp')" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-transparent to-[#080808]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ibk-dark-deep/95 via-ibk-dark-deep/70 to-ibk-dark-deep/95" />
+      {/* Acento laranja sutil no fundo */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E84C1E]/40 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
 
         {/* Versículo em destaque */}
         <FadeIn>
           <div className="text-center mb-20">
-            <p className="font-serif italic text-white/50 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-3">
+            <p className="font-serif italic text-white/40 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-3">
               &ldquo;{COPY.dizimos.versiculoTexto}&rdquo;
             </p>
-            <span className="text-[#E84C1E] font-display font-700 text-sm">{COPY.dizimos.versiculoRef}</span>
+            <span className="text-[#E84C1E] font-display font-bold text-sm">{COPY.dizimos.versiculoRef}</span>
           </div>
         </FadeIn>
 
@@ -34,14 +36,14 @@ export default function DoacoesSection() {
             <FadeIn>
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-6 h-px bg-[#E84C1E]" />
-                <span className="text-white/50 text-xs font-body uppercase tracking-[0.2em]">
+                <span className="text-white/40 text-xs font-body uppercase tracking-[0.2em]">
                   {COPY.dizimos.eyebrow}
                 </span>
               </div>
-              <h2 className="font-display font-900 text-[clamp(2rem,4vw,3.5rem)] text-white leading-tight tracking-tight mb-6">
+              <h2 className="font-display font-black text-[clamp(2rem,4vw,3.5rem)] text-white leading-tight tracking-tight mb-6">
                 {COPY.dizimos.headline}
               </h2>
-              <p className="text-white/55 font-body text-base leading-relaxed mb-10">
+              <p className="text-white/65 font-body text-base leading-relaxed mb-10">
                 {COPY.dizimos.subline}
               </p>
             </FadeIn>
@@ -56,10 +58,10 @@ export default function DoacoesSection() {
                   </svg>
                 </div>
                 <div>
-                  <span className="font-display font-800 text-[10px] uppercase tracking-[0.2em] text-white/30 block">
+                  <span className="font-display font-extrabold text-[10px] uppercase tracking-[0.2em] text-white/40 block">
                     {COPY.dizimos.ctaPix}
                   </span>
-                  <span className="font-display font-700 text-white text-sm">{DOACOES.pix}</span>
+                  <span className="font-display font-bold text-white text-sm">{DOACOES.pix}</span>
                 </div>
               </div>
             </FadeIn>
@@ -67,7 +69,7 @@ export default function DoacoesSection() {
             <FadeIn delay={0.2}>
               <Link
                 href="/doacoes"
-                className="inline-flex items-center gap-2 text-white font-display font-700 text-sm hover:text-[#E84C1E] transition-colors group"
+                className="inline-flex items-center gap-2 text-white font-display font-bold text-sm hover:text-[#E84C1E] transition-colors group"
               >
                 {COPY.dizimos.ctaDetalhes}
                 <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
@@ -79,13 +81,13 @@ export default function DoacoesSection() {
           <div className="grid grid-cols-2 gap-3">
             {DOACOES.bancos.map((banco, i) => (
               <FadeIn key={banco.banco} delay={i * 0.07} direction="left">
-                <div className="p-5 border border-white/8 rounded bg-[#111] hover:border-[#E84C1E]/30 transition-colors">
-                  <span className="font-display font-800 text-[10px] uppercase tracking-widest text-white/30 block mb-3">
+                <div className="p-5 border border-white/10 rounded bg-ibk-dark-card hover:border-[#E84C1E]/30 transition-colors">
+                  <span className="font-display font-extrabold text-[10px] uppercase tracking-widest text-white/40 block mb-3">
                     {banco.banco}
                   </span>
                   <p className="font-body text-xs text-white/60 leading-relaxed">
-                    Ag. <span className="text-white font-600">{banco.agencia}</span><br />
-                    Cc. <span className="text-white font-600">{banco.conta}</span>
+                    Ag. <span className="text-white font-semibold">{banco.agencia}</span><br />
+                    Cc. <span className="text-white font-semibold">{banco.conta}</span>
                   </p>
                 </div>
               </FadeIn>
