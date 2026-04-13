@@ -8,6 +8,8 @@ const outfit = Outfit({
   subsets: ["latin"],
   weight: ["400", "600", "700", "800", "900"],
   display: "swap",
+  adjustFontFallback: true,
+  preload: true,
 });
 
 const dmSans = DM_Sans({
@@ -15,6 +17,8 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
+  adjustFontFallback: true,
+  preload: true,
 });
 
 const cormorant = Cormorant_Garamond({
@@ -23,6 +27,8 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "700"],
   style: ["normal", "italic"],
   display: "swap",
+  adjustFontFallback: true,
+  preload: true,
 });
 
 export const metadata: Metadata = {
