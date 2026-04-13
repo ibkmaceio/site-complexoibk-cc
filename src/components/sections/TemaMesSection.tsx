@@ -45,10 +45,10 @@ export default function TemaMesSection() {
             <FadeIn delay={0.24}>
               <Link
                 href="/sobre"
-                className="inline-flex items-center gap-2 text-white/65 font-display font-bold text-sm hover:text-[#E84C1E] transition-colors group"
+                className="inline-flex items-center gap-2 text-white/65 font-display font-bold text-sm hover:text-[#E84C1E] active:text-[#E84C1E] transition-colors group"
               >
                 Conheça nossa mensagem
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={14} className="group-hover:translate-x-1 group-active:translate-x-1 transition-transform" />
               </Link>
             </FadeIn>
           </div>
@@ -59,12 +59,13 @@ export default function TemaMesSection() {
               <FadeIn key={v.titulo} delay={0.1 + i * 0.07} direction="left">
                 <motion.div
                   whileHover={{ scale: 1.03, y: -4 }}
+                  whileTap={{ scale: 0.97 }}
                   transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative overflow-hidden border border-white/10 rounded p-5 bg-ibk-dark-card hover:border-[#E84C1E]/50 hover:bg-[#261510] transition-colors duration-300"
+                  className="group relative overflow-hidden border border-white/10 rounded p-5 bg-ibk-dark-card hover:border-[#E84C1E]/50 active:border-[#E84C1E]/50 hover:bg-[#261510] active:bg-[#261510] transition-colors duration-300"
                 >
-                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-[#E84C1E] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-[#E84C1E] to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity" />
                   <span className="text-[#E84C1E] text-xl block mb-3">{v.icone}</span>
-                  <h4 className="font-display font-extrabold text-white text-sm uppercase tracking-widest mb-2 group-hover:text-[#E84C1E] transition-colors">
+                  <h4 className="font-display font-extrabold text-white text-sm uppercase tracking-widest mb-2 group-hover:text-[#E84C1E] group-active:text-[#E84C1E] transition-colors">
                     {v.titulo}
                   </h4>
                   <p className="text-white/65 font-body text-xs leading-relaxed">{v.texto}</p>

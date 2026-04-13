@@ -44,10 +44,10 @@ export default function PregacoesSection() {
               href={CANAL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-white/65 hover:text-white font-display font-bold text-sm transition-colors group shrink-0"
+              className="flex items-center gap-2 text-white/65 hover:text-white active:text-white font-display font-bold text-sm transition-colors group shrink-0"
             >
               {COPY.pregacoes.cta}
-              <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={15} className="group-hover:translate-x-1 group-active:translate-x-1 transition-transform" />
             </a>
           </FadeIn>
         </div>
@@ -66,18 +66,18 @@ export default function PregacoesSection() {
                   <img
                     src={v.thumbnail}
                     alt={v.titulo}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-105"
                   />
-                  <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 transition-colors" />
+                  <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 group-active:bg-black/0 transition-colors" />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-9 h-9 flex items-center justify-center rounded-full bg-[#E84C1E]/90 group-hover:bg-[#E84C1E] group-hover:scale-110 transition-all">
+                    <div className="w-9 h-9 flex items-center justify-center rounded-full bg-[#E84C1E]/90 group-hover:bg-[#E84C1E] group-hover:scale-110 group-active:bg-[#E84C1E] group-active:scale-110 transition-all">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="white" className="ml-0.5">
                         <polygon points="5 3 19 12 5 21 5 3" />
                       </svg>
                     </div>
                   </div>
                 </div>
-                <h4 className="font-display font-bold text-sm text-white/90 leading-snug line-clamp-2 group-hover:text-white transition-colors">
+                <h4 className="font-display font-bold text-sm text-white/90 leading-snug line-clamp-2 group-hover:text-white group-active:text-white transition-colors">
                   {v.titulo}
                 </h4>
                 <p className="text-white/65 font-body text-xs mt-1">

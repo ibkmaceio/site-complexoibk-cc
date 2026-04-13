@@ -69,10 +69,10 @@ export default function DoacoesSection() {
             <FadeIn delay={0.2}>
               <Link
                 href="/doacoes"
-                className="inline-flex items-center gap-2 text-white font-display font-bold text-sm hover:text-[#E84C1E] transition-colors group"
+                className="inline-flex items-center gap-2 text-white font-display font-bold text-sm hover:text-[#E84C1E] active:text-[#E84C1E] transition-colors group"
               >
                 {COPY.dizimos.ctaDetalhes}
-                <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={15} className="group-hover:translate-x-1 group-active:translate-x-1 transition-transform" />
               </Link>
             </FadeIn>
           </div>
@@ -81,7 +81,7 @@ export default function DoacoesSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {DOACOES.bancos.map((banco, i) => (
               <FadeIn key={banco.banco} delay={i * 0.07} direction="left">
-                <div className="p-5 border border-white/10 rounded bg-ibk-dark-card hover:border-[#E84C1E]/30 transition-colors">
+                <div className="p-5 border border-white/10 rounded bg-ibk-dark-card hover:border-[#E84C1E]/30 active:border-[#E84C1E]/30 transition-colors">
                   <span className="font-display font-extrabold text-[10px] uppercase tracking-widest text-white/40 block mb-3">
                     {banco.banco}
                   </span>

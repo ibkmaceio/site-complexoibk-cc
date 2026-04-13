@@ -55,10 +55,10 @@ export default function SobreSection() {
           <FadeIn delay={0.4}>
             <Link
               href="/nossa-historia"
-              className="inline-flex items-center gap-2 text-white font-display font-bold text-sm hover:text-[#E84C1E] transition-colors group"
+              className="inline-flex items-center gap-2 text-white font-display font-bold text-sm hover:text-[#E84C1E] active:text-[#E84C1E] transition-colors group"
             >
               {COPY.sobre.cta}
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={16} className="group-hover:translate-x-1 group-active:translate-x-1 transition-transform" />
             </Link>
           </FadeIn>
         </div>
@@ -85,7 +85,7 @@ export default function SobreSection() {
               {COPY.sobre.valores.map((v) => (
                 <div
                   key={v.titulo}
-                  className="bg-ibk-dark-card border border-white/12 rounded p-4 hover:border-[#E84C1E]/40 transition-colors"
+                  className="bg-ibk-dark-card border border-white/12 rounded p-4 hover:border-[#E84C1E]/40 active:border-[#E84C1E]/40 transition-colors"
                 >
                   <span className="text-[#E84C1E] text-lg block mb-2">{v.icone}</span>
                   <h5 className="font-display font-extrabold text-white text-sm mb-1">{v.titulo}</h5>

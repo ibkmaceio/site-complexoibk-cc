@@ -29,7 +29,6 @@ function formatDate(dateStr: string) {
 export default function VideosSection() {
   const [openVideo, setOpenVideo] = useState<VideoEntry | null>(null);
 
-  // Bloqueia scroll do body enquanto modal está aberto
   useEffect(() => {
     if (openVideo) {
       document.body.style.overflow = "hidden";
@@ -41,7 +40,6 @@ export default function VideosSection() {
     };
   }, [openVideo]);
 
-  // Fecha modal ao pressionar ESC
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpenVideo(null);
@@ -76,10 +74,10 @@ export default function VideosSection() {
                 href={PLAYLIST_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white/65 hover:text-white font-display font-bold text-sm transition-colors group shrink-0"
+                className="flex items-center gap-2 text-white/65 hover:text-white active:text-white font-display font-bold text-sm transition-colors group shrink-0"
               >
                 {COPY.tvIbk.cta}
-                <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={15} className="group-hover:translate-x-1 group-active:translate-x-1 transition-transform" />
               </a>
             </FadeIn>
           </div>
@@ -97,12 +95,12 @@ export default function VideosSection() {
                   <img
                     src={principal.thumbnail}
                     alt={principal.titulo}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 group-active:scale-105"
                   />
-                  <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 transition-colors" />
+                  <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 group-active:bg-black/0 transition-colors" />
                   {/* Play button */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-18 h-18 flex items-center justify-center rounded-full border-2 border-white/80 bg-black/25 backdrop-blur-sm transition-all group-hover:bg-[#E84C1E] group-hover:border-[#E84C1E] group-hover:scale-110">
+                    <div className="w-18 h-18 flex items-center justify-center rounded-full border-2 border-white/80 bg-black/25 backdrop-blur-sm transition-all group-hover:bg-[#E84C1E] group-hover:border-[#E84C1E] group-hover:scale-110 group-active:bg-[#E84C1E] group-active:border-[#E84C1E] group-active:scale-110">
                       <svg width="28" height="28" viewBox="0 0 24 24" fill="white" className="ml-1">
                         <polygon points="5 3 19 12 5 21 5 3" />
                       </svg>
@@ -110,7 +108,7 @@ export default function VideosSection() {
                   </div>
                 </div>
                 <div className="mt-4 px-1">
-                  <h3 className="font-display font-extrabold text-lg text-white leading-snug group-hover:text-[#E84C1E] transition-colors">
+                  <h3 className="font-display font-extrabold text-lg text-white leading-snug group-hover:text-[#E84C1E] group-active:text-[#E84C1E] transition-colors">
                     {principal.titulo}
                   </h3>
                   <p className="text-white/65 font-body text-xs mt-1">
@@ -133,9 +131,9 @@ export default function VideosSection() {
                       <img
                         src={v.thumbnail}
                         alt={v.titulo}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-active:scale-110"
                       />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors">
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 group-active:bg-black/0 transition-colors">
                         <div className="w-7 h-7 flex items-center justify-center rounded-full bg-[#E84C1E]/90">
                           <svg width="10" height="10" viewBox="0 0 24 24" fill="white" className="ml-0.5">
                             <polygon points="5 3 19 12 5 21 5 3" />
@@ -144,7 +142,7 @@ export default function VideosSection() {
                       </div>
                     </div>
                     <div className="flex-1 pt-1">
-                      <h4 className="font-display font-bold text-sm text-white/90 leading-snug line-clamp-2 group-hover:text-white transition-colors">
+                      <h4 className="font-display font-bold text-sm text-white/90 leading-snug line-clamp-2 group-hover:text-white group-active:text-white transition-colors">
                         {v.titulo}
                       </h4>
                       <p className="text-white/65 font-body text-xs mt-1.5">
@@ -171,7 +169,7 @@ export default function VideosSection() {
           >
             <button
               type="button"
-              className="absolute -top-10 right-0 text-white/80 hover:text-white transition-colors"
+              className="absolute -top-10 right-0 text-white/80 hover:text-white active:text-white transition-colors"
               onClick={() => setOpenVideo(null)}
               aria-label="Fechar"
             >
