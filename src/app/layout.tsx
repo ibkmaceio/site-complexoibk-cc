@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
-import { Nunito, Inter, Playfair_Display } from "next/font/google";
+import { Outfit, DM_Sans, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 
-const nunito = Nunito({
-  variable: "--font-nunito",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   weight: ["400", "600", "700", "800", "900"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
   weight: ["400", "700"],
   style: ["normal", "italic"],
@@ -86,7 +86,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${nunito.variable} ${inter.variable} ${playfair.variable} h-full`}
+      className={`${outfit.variable} ${dmSans.variable} ${cormorant.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <ScrollProgress />

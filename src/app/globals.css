@@ -19,10 +19,9 @@
   --color-ibk-border:       #E5E7EB;
 
   /* ── Fontes ── */
-  --font-display:  var(--font-nunito);
-  --font-serif:    var(--font-playfair);
-  --font-body:     var(--font-inter);
-  /* font-headline removed — hero usa font-display (Nunito) */
+  --font-display:  var(--font-outfit);
+  --font-serif:    var(--font-cormorant);
+  --font-body:     var(--font-dm-sans);
 }
 
 /* ── Base ── */
@@ -37,7 +36,7 @@ html {
 body {
   background-color: #1a1a1a;
   color: #ffffff;
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -46,7 +45,7 @@ body {
 /* Pesos controlados via classes Tailwind nos componentes:
    font-black (900), font-extrabold (800), font-bold (700) */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -73,7 +72,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.25rem 0.75rem;
   background-color: #E84C1E;
   color: #ffffff;
-  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.08em;
