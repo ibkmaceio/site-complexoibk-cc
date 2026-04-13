@@ -2,19 +2,27 @@
 
 @theme {
   /* ── Cores IBK ── */
-  --color-ibk-dark:         #1A1A1A;
-  --color-ibk-dark-soft:    #252525;
+  /* Backgrounds dark (usar com semântica, não por número) */
+  --color-ibk-dark-deep:    #0d0d0d;  /* hero, seções de maior drama */
+  --color-ibk-dark:         #1A1A1A;  /* base, header, footer        */
+  --color-ibk-dark-surface: #222222;  /* fundo de seções alternadas  */
+  --color-ibk-dark-card:    #2d2d2d;  /* cards, thumbnails           */
+
+  /* Acento */
   --color-ibk-accent:       #E84C1E;
   --color-ibk-accent-dark:  #C43A12;
   --color-ibk-accent-light: #FFF0EC;
+
+  /* Superfície clara */
   --color-ibk-surface:      #F8F6F5;
   --color-ibk-muted:        #9CA3AF;
   --color-ibk-border:       #E5E7EB;
 
   /* ── Fontes ── */
-  --font-display: var(--font-nunito);
-  --font-serif:   var(--font-playfair);
-  --font-body:    var(--font-inter);
+  --font-display:  var(--font-nunito);
+  --font-serif:    var(--font-playfair);
+  --font-body:     var(--font-inter);
+  /* font-headline removed — hero usa font-display (Nunito) */
 }
 
 /* ── Base ── */
@@ -27,17 +35,18 @@ html {
 }
 
 body {
-  background-color: #ffffff;
-  color: #1A1A1A;
+  background-color: #1a1a1a;
+  color: #ffffff;
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* ── Tipografia base ── */
+/* Pesos controlados via classes Tailwind nos componentes:
+   font-black (900), font-extrabold (800), font-bold (700) */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-nunito), system-ui, sans-serif;
-  font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }

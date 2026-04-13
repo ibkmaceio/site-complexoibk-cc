@@ -7,7 +7,7 @@ import { CHURCH_INFO } from "@/lib/data/mock";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-[#080808]">
+    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-ibk-dark-deep">
 
       {/* ── Vídeo de fundo YouTube ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -30,11 +30,11 @@ export default function HeroSection() {
       </div>
 
       {/* ── Gradientes cinematográficos ── */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
 
       {/* ── Conteúdo ── */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 sm:px-10 lg:px-16 pb-20 pt-32">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-20 pt-32">
         <div className="max-w-3xl">
 
           {/* Eyebrow */}
@@ -56,7 +56,7 @@ export default function HeroSection() {
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display font-900 text-[clamp(3rem,9vw,7rem)] text-white leading-[0.9] tracking-tight"
+              className="font-display font-black text-[clamp(3.5rem,9vw,7.5rem)] text-white leading-[0.9] tracking-tight"
             >
               Você foi feito
               <br />
@@ -84,13 +84,13 @@ export default function HeroSection() {
           >
             <Link
               href="/programacao"
-              className="group px-8 py-4 bg-white text-[#0d0d0d] font-display font-800 text-sm tracking-wide rounded hover:bg-[#F8F6F5] transition-all"
+              className="group px-8 py-4 bg-white text-[#0d0d0d] font-display font-extrabold text-sm tracking-wide rounded hover:bg-[#F8F6F5] transition-all"
             >
               {COPY.hero.cta1}
             </Link>
             <Link
               href="/ao-vivo"
-              className="flex items-center gap-3 px-8 py-4 border border-white/25 text-white font-display font-700 text-sm tracking-wide rounded hover:border-[#E84C1E] hover:text-white transition-all"
+              className="flex items-center gap-3 px-8 py-4 border border-white/25 text-white font-display font-bold text-sm tracking-wide rounded hover:border-[#E84C1E] hover:text-white transition-all"
             >
               <span className="w-2 h-2 rounded-full bg-[#E84C1E] animate-pulse" />
               {COPY.hero.cta2}

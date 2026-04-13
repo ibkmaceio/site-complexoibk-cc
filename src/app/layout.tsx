@@ -88,7 +88,7 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${nunito.variable} ${inter.variable} ${playfair.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col antialiased">
+      <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <ScrollProgress />
         {children}
       </body>

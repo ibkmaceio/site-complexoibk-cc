@@ -52,12 +52,12 @@ export default function Footer() {
               className="h-10 w-auto object-contain mb-4"
             />
 
-            <p className="text-white/60 font-body text-sm leading-relaxed max-w-xs">
+            <p className="text-white/65 font-body text-sm leading-relaxed max-w-xs">
               Uma comunidade de fé em Maceió, Alagoas, comprometida com o amor
               a Deus e ao próximo.
             </p>
 
-            <div className="flex items-center gap-2 mt-4 text-white/60 text-sm font-body">
+            <div className="flex items-center gap-2 mt-4 text-white/65 text-sm font-body">
               <MapPin size={14} className="text-[#E84C1E] shrink-0" />
               <span>Maceió, Alagoas — Brasil</span>
             </div>
@@ -96,7 +96,7 @@ export default function Footer() {
           {/* Links */}
           {FOOTER_LINKS.map((col) => (
             <div key={col.titulo}>
-              <h4 className="font-display font-800 text-xs uppercase tracking-widest text-white/40 mb-4">
+              <h4 className="font-display font-extrabold text-xs uppercase tracking-widest text-white/40 mb-4">
                 {col.titulo}
               </h4>
               <ul className="space-y-2.5">
@@ -122,7 +122,7 @@ export default function Footer() {
           <p className="text-white/40 text-xs font-body">
             © {currentYear} Igreja Batista Koinonia — Maceió, AL
           </p>
-          <p className="text-white/30 text-xs font-body flex items-center gap-1">
+          <p className="text-white/40 text-xs font-body flex items-center gap-1">
             Feito com <Heart size={10} className="text-[#E84C1E]" /> em Maceió
           </p>
         </div>

@@ -64,9 +64,9 @@ export default function Header() {
               }}
             />
             {/* Fallback text logo */}
-            <span className="font-display font-900 text-white text-xl tracking-tight hidden">
+            <span className="font-display font-black text-white text-xl tracking-tight hidden">
               koinonia
-              <span className="block text-xs font-body font-400 tracking-widest uppercase opacity-70">
+              <span className="block text-xs font-body font-normal tracking-widest uppercase opacity-70">
                 igreja batista
               </span>
             </span>
@@ -83,7 +83,7 @@ export default function Header() {
               >
                 <Link
                   href={link.href}
-                  className="px-3 py-2 text-sm font-body font-500 text-white/85 hover:text-white transition-colors"
+                  className="px-3 py-2 text-sm font-display font-semibold text-white/90 hover:text-white transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -110,7 +110,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <Link
               href="/ao-vivo"
-              className="flex items-center gap-1.5 px-4 py-2 bg-[#E84C1E] hover:bg-[#C43A12] text-white text-sm font-display font-700 rounded transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2 bg-[#E84C1E] hover:bg-[#C43A12] text-white text-sm font-display font-bold rounded transition-colors"
             >
               <Radio size={14} />
               Ao Vivo
@@ -136,7 +136,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="py-2.5 text-white/85 hover:text-white font-body font-500 border-b border-white/5 transition-colors"
+                className="py-2.5 text-white/90 hover:text-white font-display font-semibold border-b border-white/5 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -145,7 +145,7 @@ export default function Header() {
             <div className="flex gap-3 pt-4">
               <Link
                 href="/ao-vivo"
-                className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-[#E84C1E] text-white text-sm font-display font-700 rounded transition-colors hover:bg-[#C43A12]"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-[#E84C1E] text-white text-sm font-display font-bold rounded transition-colors hover:bg-[#C43A12]"
                 onClick={() => setMobileOpen(false)}
               >
                 <Radio size={14} />
