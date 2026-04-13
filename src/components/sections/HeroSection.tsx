@@ -26,18 +26,13 @@ export default function HeroSection() {
             </span>
           </div>
 
-          {/* Headline — LCP element, visível imediatamente */}
-          <div className="overflow-hidden mb-8">
-            <h1
-              className="font-display font-black text-[clamp(3.5rem,9vw,7.5rem)] text-white leading-[0.9] tracking-tight animate-hero-up"
-              style={{ animationDelay: "0.2s" }}
-            >
-              Você foi feito
-              <br />
-              para{" "}
-              <span className="font-serif italic text-white/90">pertencer.</span>
-            </h1>
-          </div>
+          {/* Headline — LCP element: sem delay, sem hidden, renderiza imediatamente */}
+          <h1 className="font-display font-black text-[clamp(3.5rem,9vw,7.5rem)] text-white leading-[0.9] tracking-tight mb-8">
+            Você foi feito
+            <br />
+            para{" "}
+            <span className="font-serif italic text-white/90">pertencer.</span>
+          </h1>
 
           {/* Subline */}
           <p

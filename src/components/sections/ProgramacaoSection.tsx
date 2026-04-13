@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
 import { COPY } from "@/lib/data/copy";
 import { PROGRAMACAO } from "@/lib/data/mock";
@@ -44,12 +43,7 @@ export default function ProgramacaoSection() {
             {PROGRAMACAO.flatMap((dia) =>
               dia.cultos.map((culto, i) => (
                 <FadeIn key={`${dia.dia}-${i}`} delay={i * 0.08}>
-                  <motion.div
-                    whileHover={{ scale: 1.03, y: -4 }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                    className="group relative overflow-hidden border border-white/10 rounded p-6 bg-ibk-dark-card hover:border-[#E84C1E]/50 active:border-[#E84C1E]/50 hover:bg-[#2e1a0e] active:bg-[#2e1a0e] transition-colors duration-300"
-                  >
+                  <div className="group relative overflow-hidden border border-white/10 rounded p-6 bg-ibk-dark-card hover:border-[#E84C1E]/50 active:border-[#E84C1E]/50 hover:bg-[#2e1a0e] active:bg-[#2e1a0e] hover:-translate-y-1 hover:scale-[1.03] active:scale-[0.97] transition-all duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
                     <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-[#E84C1E] to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity" />
 
                     <span className="font-display font-extrabold text-[10px] uppercase tracking-[0.25em] text-white/65 block mb-4">
@@ -61,7 +55,7 @@ export default function ProgramacaoSection() {
                     <p className="font-display font-bold text-3xl text-white/40">
                       {culto.horario}
                     </p>
-                  </motion.div>
+                  </div>
                 </FadeIn>
               ))
             )}
