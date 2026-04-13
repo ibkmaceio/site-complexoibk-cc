@@ -66,6 +66,7 @@ export default function PregacoesSection() {
                   <img
                     src={v.thumbnail}
                     alt={v.titulo}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 group-active:bg-black/0 transition-colors" />
