@@ -63,11 +63,16 @@
       "thumbnail": "https://i.ytimg.com/vi/yMVdc5tRMm0/hqdefault.jpg"
     }
   ],
-  "pinnedPodcastId": "eYQPij7ntRA",
   "podcasts": [
     {
+      "id": "VOOwK7csjxM",
+      "titulo": "O que fazer quando Deus está em silêncio | IBKAST EP 04",
+      "data": "2026-04-10",
+      "thumbnail": "https://i.ytimg.com/vi/VOOwK7csjxM/hqdefault.jpg"
+    },
+    {
       "id": "r2WwnnNH6R8",
-      "titulo": "Deus escolheu agir através de pessoas imperfeitas",
+      "titulo": "Deus escolheu agir através de pessoas imperfeitas",
       "data": "2026-03-30",
       "thumbnail": "https://i.ytimg.com/vi/r2WwnnNH6R8/hqdefault.jpg"
     },
@@ -88,13 +93,7 @@
       "titulo": "Os perigos da liderança sem vida com Deus | Pr. Pedro Luz e Pr. Raphael Abdalla - Ep.01",
       "data": "2026-03-06",
       "thumbnail": "https://i.ytimg.com/vi/sCk__3GN-lU/hqdefault.jpg"
-    },
-    {
-      "id": "eYQPij7ntRA",
-      "titulo": "O propósito do Jejum _IBKAST",
-      "data": "2024-02-16",
-      "thumbnail": "https://i.ytimg.com/vi/eYQPij7ntRA/hqdefault.jpg"
     }
   ],
-  "updatedAt": "2026-04-12T03:41:38.991Z"
+  "updatedAt": "2026-04-13T09:00:00.000Z"
 }
