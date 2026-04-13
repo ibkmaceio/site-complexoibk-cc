@@ -179,7 +179,7 @@ export default function VideosSection() {
             </button>
             <div className="relative w-full aspect-video">
               <iframe
-                src={`https://www.youtube.com/embed/${openVideo.id}?autoplay=1`}
+                src={`https://www.youtube-nocookie.com/embed/${openVideo.id}?autoplay=1`}
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full rounded"

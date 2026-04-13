@@ -11,8 +11,8 @@ export default function AoVivoPlayer() {
   const [live, setLive] = useState(false);
 
   const src = live
-    ? `https://www.youtube.com/embed/live_stream?channel=${CHANNEL_ID}&autoplay=1`
-    : `https://www.youtube.com/embed/${ultimoCulto.id}?autoplay=1`;
+    ? `https://www.youtube-nocookie.com/embed/live_stream?channel=${CHANNEL_ID}&autoplay=1`
+    : `https://www.youtube-nocookie.com/embed/${ultimoCulto.id}?autoplay=1`;
 
   return (
     <section className="px-6 sm:px-10 lg:px-16 py-16 max-w-7xl mx-auto">
