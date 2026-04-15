@@ -35,6 +35,8 @@ jobs:
       # Gera o site estático em ./out
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
