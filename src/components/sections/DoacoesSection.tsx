@@ -6,7 +6,7 @@ import { DOACOES } from "@/lib/data/mock";
 
 export default function DoacoesSection() {
   return (
-    <section className="relative overflow-hidden bg-ibk-dark-deep py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+    <section className="relative overflow-hidden bg-ibk-dark-deep py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
 
       {/* Foto de fundo */}
       <div
@@ -29,14 +29,14 @@ export default function DoacoesSection() {
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
 
           {/* Texto */}
           <div>
             <FadeIn>
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-6 h-px bg-[#E84C1E]" />
-                <span className="text-white/40 text-xs font-body uppercase tracking-[0.2em]">
+                <span className="text-white/65 text-xs font-body uppercase tracking-[0.2em]">
                   {COPY.dizimos.eyebrow}
                 </span>
               </div>

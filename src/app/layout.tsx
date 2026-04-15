@@ -61,12 +61,21 @@ export const metadata: Metadata = {
     title: "IBK — Igreja Batista Koinonia | Maceió, Alagoas",
     description:
       "Igreja Batista Koinonia em Maceió, Alagoas. Cultos, eventos, ministérios e TV IBK ao vivo.",
+    images: [
+      {
+        url: "https://ibkmaceio.com.br/assets/img/ibk-maceio-templo-3000-lugares-auditorio.webp",
+        width: 1200,
+        height: 630,
+        alt: "IBK — Igreja Batista Koinonia Maceió",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "IBK — Igreja Batista Koinonia | Maceió, Alagoas",
     description:
       "Igreja Batista Koinonia em Maceió, Alagoas. Cultos, eventos, ministérios e TV IBK ao vivo.",
+    images: ["https://ibkmaceio.com.br/assets/img/ibk-maceio-templo-3000-lugares-auditorio.webp"],
   },
   alternates: {
     canonical: "https://ibkmaceio.com.br",
@@ -94,6 +103,9 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${outfit.variable} ${dmSans.variable} ${cormorant.variable} h-full`}
     >
+      <head>
+        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="" />
+      </head>
       <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <ScrollProgress />
         {children}

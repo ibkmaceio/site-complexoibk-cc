@@ -16,7 +16,7 @@ function formatDate(dateStr: string) {
 
 export default function PregacoesSection() {
   return (
-    <section className="bg-ibk-dark-surface py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+    <section className="bg-ibk-dark-surface py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}

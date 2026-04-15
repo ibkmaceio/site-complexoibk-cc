@@ -4,7 +4,7 @@ import VideosSection from "@/components/sections/VideosSection";
 
 export const metadata: Metadata = {
   title: "TV IBK",
-  description: "Assista aos cultos e pregações da Igreja Batista Koinonia — TV IBK online.",
+  description: "Assista pregações, cultos e conteúdo da Igreja Batista Koinonia em Maceió na TV IBK — vídeos novos toda semana.",
 };
 
 export default function TvIbkPage() {

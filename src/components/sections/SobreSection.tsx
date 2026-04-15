@@ -3,10 +3,16 @@ import { ArrowRight } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
 import { COPY } from "@/lib/data/copy";
 
-export default function SobreSection() {
+interface SobreSectionProps {
+  asH1?: boolean;
+}
+
+export default function SobreSection({ asH1 = false }: SobreSectionProps) {
+  const Heading = asH1 ? "h1" : "h2";
+
   return (
-    <section className="bg-ibk-dark-surface py-28 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    <section className="bg-ibk-dark-surface py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
 
         {/* Texto */}
         <div>
@@ -20,11 +26,11 @@ export default function SobreSection() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <h2 className="font-display font-black text-[clamp(2.2rem,4.5vw,3.8rem)] text-white leading-[1.05] tracking-tight mb-8">
+            <Heading className="font-display font-black text-[clamp(2.2rem,4.5vw,3.8rem)] text-white leading-[1.05] tracking-tight mb-8">
               Uma comunidade que{" "}
               <span className="font-serif italic text-white/90">transforma vidas</span>{" "}
               em Maceió.
-            </h2>
+            </Heading>
           </FadeIn>
 
           <FadeIn delay={0.2}>
@@ -68,6 +74,8 @@ export default function SobreSection() {
           <FadeIn direction="left">
             <div className="relative aspect-[4/3] bg-ibk-dark-surface rounded overflow-hidden">
               <div
+                role="img"
+                aria-label="Comunidade IBK — 8 anos de fé e fraternidade em Maceió"
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: "url('/assets/img/ibk-maceio-comunidade-fraternidade-8-anos.webp')" }}
               />

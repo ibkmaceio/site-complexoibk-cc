@@ -6,10 +6,10 @@ import { PROGRAMACAO } from "@/lib/data/mock";
 
 export default function ProgramacaoSection() {
   return (
-    <section className="bg-ibk-dark-surface py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+    <section className="bg-ibk-dark-surface py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
       <div className="max-w-7xl mx-auto">
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12 lg:gap-16 items-start">
 
           {/* Header */}
           <div className="lg:col-span-1">

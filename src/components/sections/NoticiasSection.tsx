@@ -12,7 +12,7 @@ export default function NoticiasSection() {
   const [destaque, ...resto] = NOTICIAS;
 
   return (
-    <section className="bg-ibk-dark-surface py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+    <section className="bg-ibk-dark-surface py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
       <div className="max-w-7xl mx-auto">
 
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
@@ -43,6 +43,8 @@ export default function NoticiasSection() {
           <FadeIn className="lg:col-span-7">
             <Link href={`/novidades/${destaque.slug}`} className="group block relative overflow-hidden rounded aspect-[16/10] bg-ibk-dark-surface">
               <div
+                role="img"
+                aria-label={destaque.titulo}
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 group-active:scale-105"
                 style={{ backgroundImage: `url('${destaque.imagem}')` }}
               />
@@ -67,6 +69,8 @@ export default function NoticiasSection() {
               <FadeIn key={n.slug} delay={i * 0.08} direction="left">
                 <Link href={`/novidades/${n.slug}`} className="group flex gap-4 p-4 rounded border border-white/10 bg-ibk-dark-card hover:border-[#E84C1E]/40 active:border-[#E84C1E]/40 hover:bg-[#2e1a0e] active:bg-[#2e1a0e] transition-all">
                   <div
+                    role="img"
+                    aria-label={n.titulo}
                     className="w-20 h-20 shrink-0 rounded overflow-hidden bg-ibk-dark-card bg-cover bg-center"
                     style={{ backgroundImage: `url('${n.imagem}')` }}
                   />

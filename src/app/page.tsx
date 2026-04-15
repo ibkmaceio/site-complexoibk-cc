@@ -19,6 +19,14 @@ export const metadata: Metadata = {
     title: "IBK — Igreja Batista Koinonia | Maceió, Alagoas",
     description: "Igreja Batista Koinonia em Maceió, Alagoas. Cultos, eventos, ministérios e TV IBK ao vivo.",
     url: "https://ibkmaceio.com.br",
+    images: [
+      {
+        url: "https://ibkmaceio.com.br/assets/img/ibk-maceio-templo-3000-lugares-auditorio.webp",
+        width: 1200,
+        height: 630,
+        alt: "IBK — Igreja Batista Koinonia Maceió",
+      },
+    ],
   },
 };
 
@@ -57,11 +65,11 @@ export default function HomePage() {
 
   return (
     <>
-      <Script id="schema-church" type="application/ld+json" strategy="afterInteractive">
+      <Script id="schema-church" type="application/ld+json" strategy="beforeInteractive">
         {schemaOrg}
       </Script>
       <Header />
-      <main>
+      <main id="main-content">
         <HeroSection />
         <TemaMesSection />
         <ProgramacaoSection />

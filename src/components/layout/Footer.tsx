@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Heart } from "lucide-react";
 import { CHURCH_INFO } from "@/lib/data/mock";
 
@@ -46,9 +47,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <img
+            <Image
               src="/assets/logo/logo-branco.png"
               alt="IBK — Igreja Batista Koinonia"
+              width={120}
+              height={40}
               className="h-10 w-auto object-contain mb-4"
             />
 
@@ -96,15 +99,15 @@ export default function Footer() {
           {/* Links */}
           {FOOTER_LINKS.map((col) => (
             <div key={col.titulo}>
-              <h4 className="font-display font-extrabold text-xs uppercase tracking-widest text-white/40 mb-4">
+              <h4 className="font-display font-extrabold text-xs uppercase tracking-widest text-white/60 mb-4">
                 {col.titulo}
               </h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-1">
                 {col.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-white/65 hover:text-white font-body transition-colors"
+                      className="block py-2 text-sm text-white/65 hover:text-white font-body transition-colors"
                     >
                       {link.label}
                     </Link>

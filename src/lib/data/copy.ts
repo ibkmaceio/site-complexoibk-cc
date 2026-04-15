@@ -53,7 +53,7 @@ export const COPY = {
   // ── PROGRAMAÇÃO ───────────────────────────────────────
   programacao: {
     eyebrow: "Venha nos visitar",
-    headline: "Programação",
+    headline: "Quando estamos aqui.",
     subline: "Você e sua família são sempre bem-vindos. Escolha o culto que faz mais sentido para o seu momento.",
     cta: "Ver programação completa",
   },
@@ -95,8 +95,8 @@ export const COPY = {
   // ── PREGAÇÕES ─────────────────────────────────────
   pregacoes: {
     eyebrow: "Devocionais",
-    headline: "Pr. Pedro Luz",
-    subline: "Reflexões bíblicas do nosso pastor para o seu dia a dia.",
+    headline: "Palavra para o seu dia",
+    subline: "Reflexões bíblicas com o Pr. Pedro Luz para o seu dia a dia.",
     cta: "Ver canal no YouTube",
   },
 
@@ -140,7 +140,7 @@ export const COPY = {
     headline: "Receba novidades da IBK.",
     subline: "Eventos, mensagens e conteúdo direto no seu e-mail. Sem spam.",
     placeholder: "Seu melhor e-mail",
-    cta: "Assinar",
+    cta: "Receber novidades",
   },
 
   // ── FOOTER ────────────────────────────────────────────

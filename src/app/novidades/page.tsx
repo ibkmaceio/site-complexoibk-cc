@@ -4,7 +4,7 @@ import NoticiasSection from "@/components/sections/NoticiasSection";
 
 export const metadata: Metadata = {
   title: "Novidades",
-  description: "Notícias, eventos e novidades da Igreja Batista Koinonia em Maceió.",
+  description: "Fique por dentro das notícias, eventos e histórias de transformação da Igreja Batista Koinonia em Maceió, Alagoas.",
 };
 
 export default function NoticiasPage() {

@@ -4,7 +4,7 @@ import AoVivoPlayer from "./AoVivoPlayer";
 
 export const metadata: Metadata = {
   title: "Ao Vivo",
-  description: "Assista ao culto ao vivo da Igreja Batista Koinonia em Maceió.",
+  description: "Assista ao culto ao vivo da IBK Maceió agora mesmo. Igreja Batista Koinonia — domingos às 9h e 18h30, quartas às 19h30.",
 };
 
 export default function AoVivoPage() {

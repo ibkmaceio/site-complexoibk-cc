@@ -5,10 +5,10 @@ import { COPY } from "@/lib/data/copy";
 
 export default function TemaMesSection() {
   return (
-    <section className="bg-ibk-dark-surface py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+    <section className="bg-ibk-dark-surface py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
       <div className="max-w-7xl mx-auto">
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
 
           {/* Versículo + Tema */}
           <div>
@@ -41,7 +41,7 @@ export default function TemaMesSection() {
 
             <FadeIn delay={0.24}>
               <Link
-                href="/sobre"
+                href="/programacao"
                 className="inline-flex items-center gap-2 text-white/65 font-display font-bold text-sm hover:text-[#E84C1E] active:text-[#E84C1E] transition-colors group"
               >
                 Conheça nossa mensagem

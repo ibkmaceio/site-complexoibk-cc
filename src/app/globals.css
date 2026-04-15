@@ -71,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.25rem;
   padding: 0.25rem 0.75rem;
   background-color: #E84C1E;
-  color: #ffffff;
+  color: #0d0d0d;
   font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: 0.6875rem;
   font-weight: 700;

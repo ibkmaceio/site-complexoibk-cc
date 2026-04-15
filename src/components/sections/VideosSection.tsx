@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRight, X } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
 import { COPY } from "@/lib/data/copy";
@@ -28,10 +28,13 @@ function formatDate(dateStr: string) {
 
 export default function VideosSection() {
   const [openVideo, setOpenVideo] = useState<VideoEntry | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (openVideo) {
       document.body.style.overflow = "hidden";
+      // Foca o container do modal para suporte a leitores de tela
+      setTimeout(() => modalRef.current?.focus(), 50);
     } else {
       document.body.style.overflow = "";
     }
@@ -43,14 +46,34 @@ export default function VideosSection() {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpenVideo(null);
+
+      // Focus trap dentro do modal
+      if (e.key === "Tab" && openVideo && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last?.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first?.focus();
+          }
+        }
+      }
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
-  }, []);
+  }, [openVideo]);
 
   return (
     <>
-      <section className="bg-ibk-dark-surface py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+      <section className="bg-ibk-dark-surface py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/10">
         <div className="max-w-7xl mx-auto">
 
           {/* Header */}
@@ -95,7 +118,6 @@ export default function VideosSection() {
                   <img
                     src={principal.thumbnail}
                     alt={principal.titulo}
-                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 group-active:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 group-active:bg-black/0 transition-colors" />
@@ -128,7 +150,7 @@ export default function VideosSection() {
                     onClick={() => setOpenVideo(v)}
                     className="group flex gap-4 items-start w-full text-left"
                   >
-                    <div className="relative w-32 aspect-video bg-ibk-dark-card rounded overflow-hidden shrink-0">
+                    <div className="relative w-32 shrink-0 aspect-video bg-ibk-dark-card rounded overflow-hidden">
                       <img
                         src={v.thumbnail}
                         alt={v.titulo}
@@ -143,7 +165,7 @@ export default function VideosSection() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex-1 pt-1">
+                    <div className="flex-1 min-w-0 pt-1">
                       <h4 className="font-display font-bold text-sm text-white/90 leading-snug line-clamp-2 group-hover:text-white group-active:text-white transition-colors">
                         {v.titulo}
                       </h4>
@@ -166,18 +188,23 @@ export default function VideosSection() {
           onClick={() => setOpenVideo(null)}
         >
           <div
-            className="relative w-full max-w-4xl"
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-video-title"
+            tabIndex={-1}
+            className="relative w-full max-w-4xl focus:outline-none"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              type="button"
-              className="absolute -top-10 right-0 text-white/80 hover:text-white active:text-white transition-colors"
-              onClick={() => setOpenVideo(null)}
-              aria-label="Fechar"
-            >
-              <X size={24} />
-            </button>
             <div className="relative w-full aspect-video">
+              <button
+                type="button"
+                className="absolute top-2 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 text-white/80 hover:text-white hover:bg-[#E84C1E] active:bg-[#E84C1E] transition-colors"
+                onClick={() => setOpenVideo(null)}
+                aria-label="Fechar"
+              >
+                <X size={18} />
+              </button>
               <iframe
                 src={`https://www.youtube-nocookie.com/embed/${openVideo.id}?autoplay=1`}
                 allow="autoplay; fullscreen; picture-in-picture"
@@ -187,7 +214,10 @@ export default function VideosSection() {
               />
             </div>
             <div className="mt-3 px-1">
-              <h3 className="font-display font-bold text-white text-base leading-snug">
+              <h3
+                id="modal-video-title"
+                className="font-display font-bold text-white text-base leading-snug"
+              >
                 {openVideo.titulo}
               </h3>
               <p className="text-white/65 font-body text-xs mt-1">

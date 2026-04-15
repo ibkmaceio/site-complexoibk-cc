@@ -5,7 +5,7 @@ export default function PageShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#222222]">{children}</main>
+      <main id="main-content" className="min-h-screen bg-[#222222]">{children}</main>
       <Footer />
     </>
   );

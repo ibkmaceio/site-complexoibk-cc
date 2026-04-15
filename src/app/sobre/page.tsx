@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function SobrePage() {
   return (
     <PageShell>
-      <SobreSection />
+      <SobreSection asH1 />
     </PageShell>
   );
 }

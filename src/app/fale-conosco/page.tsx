@@ -4,7 +4,7 @@ import EmBreve from "@/components/ui/EmBreve";
 
 export const metadata: Metadata = {
   title: "Fale Conosco",
-  description: "Entre em contato com a Igreja Batista Koinonia em Maceió, Alagoas.",
+  description: "Fale com a Igreja Batista Koinonia em Maceió, AL. Pedidos de oração, primeira visita ou dúvidas — nossa equipe responde com carinho.",
 };
 
 export default function FaleConoscoPage() {

@@ -13,7 +13,7 @@ export const CHURCH_INFO = {
   pix: "30.382.392/0001-61",
   instagram: "https://instagram.com/ibkmaceio",
   youtube: "https://youtube.com/@ibkmaceio",
-  whatsapp: "",
+  whatsapp: "", // TODO: substituir pelo número real do cliente, ex: "https://wa.me/5582999999999"
   pastors: [
     { name: "Pr. Pedro Luz", role: "Pastor Titular" },
     { name: "Carla Luz", role: "Pastora" },
@@ -53,6 +53,7 @@ export const TEMA_MES = {
   imagemBg: "/assets/img/tema-abril.webp",
 };
 
+// Datas das notícias: 2026 é o ano corrente do site. Cronologia intencional.
 export const NOTICIAS = [
   {
     slug: "ibk-8-anos-culto-aniversario",

@@ -15,13 +15,13 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
 
       {/* Conteúdo — renderizado pelo servidor, sem esperar JS */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-20 pt-32">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-16 pt-24 sm:pb-20 sm:pt-28 lg:pb-20 lg:pt-32">
         <div className="max-w-3xl">
 
           {/* Eyebrow */}
           <div className="flex items-center gap-3 mb-8 animate-hero-fade" style={{ animationDelay: "0.1s" }}>
             <span className="w-6 h-px bg-[#E84C1E]" />
-            <span className="text-white/60 text-xs font-body uppercase tracking-[0.2em]">
+            <span className="text-white/65 text-xs font-body uppercase tracking-[0.2em]">
               {COPY.hero.eyebrow}
             </span>
           </div>
