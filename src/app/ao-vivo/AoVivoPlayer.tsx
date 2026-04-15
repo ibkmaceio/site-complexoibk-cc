@@ -3,74 +3,10 @@
 import { useState, useEffect } from "react";
 import { CHURCH_INFO, PROGRAMACAO } from "@/lib/data/mock";
 import videosData from "@/lib/data/videos.json";
+import { checkLive } from "@/lib/utils/check-live";
 
 const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
-const API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
-const CACHE_KEY = "ibk_live_check_v1";
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutos
 const ultimoCulto = videosData.ibk[1] ?? videosData.ibk[0];
-
-// Fallback se a API falhar ou não estiver configurada — janelas dos cultos no fuso do navegador.
-type Janela = { dia: number; inicio: number; fim: number };
-const JANELAS_LIVE: Janela[] = [
-  { dia: 0, inicio: 8.5, fim: 11 },     // Domingo 9h00 → 8h30–11h00
-  { dia: 0, inicio: 18, fim: 20.5 },    // Domingo 18h30 → 18h00–20h30
-  { dia: 3, inicio: 19, fim: 21.5 },    // Quarta 19h30 → 19h00–21h30
-  { dia: 6, inicio: 17.5, fim: 20 },    // Sábado 18h00 → 17h30–20h00
-];
-
-function estaEmHorarioDeCulto(): boolean {
-  const agora = new Date();
-  const dia = agora.getDay();
-  const hora = agora.getHours() + agora.getMinutes() / 60;
-  return JANELAS_LIVE.some((j) => j.dia === dia && hora >= j.inicio && hora < j.fim);
-}
-
-type LiveCheck = { isLive: boolean; videoId: string | null; ts: number };
-
-function readCache(): LiveCheck | null {
-  try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    if (!raw) return null;
-    const data = JSON.parse(raw) as LiveCheck;
-    if (Date.now() - data.ts > CACHE_TTL_MS) return null;
-    return data;
-  } catch {
-    return null;
-  }
-}
-
-function writeCache(data: LiveCheck) {
-  try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-  } catch {}
-}
-
-async function checkLive(): Promise<LiveCheck> {
-  const cached = readCache();
-  if (cached) return cached;
-
-  if (!API_KEY) {
-    return { isLive: estaEmHorarioDeCulto(), videoId: null, ts: Date.now() };
-  }
-
-  try {
-    const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${CHANNEL_ID}&eventType=live&type=video&key=${API_KEY}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("YouTube API error");
-    const data = await res.json();
-    const items: Array<{ id?: { videoId?: string } }> = data.items || [];
-    const result: LiveCheck = {
-      isLive: items.length > 0,
-      videoId: items[0]?.id?.videoId ?? null,
-      ts: Date.now(),
-    };
-    writeCache(result);
-    return result;
-  } catch {
-    return { isLive: estaEmHorarioDeCulto(), videoId: null, ts: Date.now() };
-  }
-}
 
 export default function AoVivoPlayer() {
   // Default false para SSR (evita hydration mismatch).

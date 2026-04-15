@@ -1,5 +1,6 @@
 import Link from "next/link";
 import HeroVideo from "./HeroVideo";
+import HeroLiveCta from "./HeroLiveCta";
 import { COPY } from "@/lib/data/copy";
 import { CHURCH_INFO } from "@/lib/data/mock";
 
@@ -53,13 +54,7 @@ export default function HeroSection() {
             >
               {COPY.hero.cta1}
             </Link>
-            <Link
-              href="/ao-vivo"
-              className="flex items-center gap-3 px-8 py-4 border border-white/25 text-white font-display font-bold text-sm tracking-wide rounded hover:border-[#E84C1E] active:border-[#E84C1E] hover:text-white transition-all"
-            >
-              <span className="w-2 h-2 rounded-full bg-[#E84C1E] animate-pulse" />
-              {COPY.hero.cta2}
-            </Link>
+            <HeroLiveCta defaultLabel={COPY.hero.cta2} />
           </div>
         </div>
       </div>
