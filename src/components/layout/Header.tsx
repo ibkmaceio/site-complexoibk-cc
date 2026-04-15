@@ -46,14 +46,6 @@ export default function Header() {
 
   return (
     <>
-      {/* Skip link — visível apenas no foco (teclado/leitor de tela) */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#E84C1E] focus:text-white focus:font-bold focus:text-sm focus:rounded focus:shadow-lg"
-      >
-        Pular para o conteúdo
-      </a>
-
       <header
         className={clsx(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
