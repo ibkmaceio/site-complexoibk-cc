@@ -104,7 +104,11 @@ export default function RootLayout({
       className={`${outfit.variable} ${dmSans.variable} ${cormorant.variable} h-full`}
     >
       <head>
+        <link rel="preconnect" href="https://www.youtube-nocookie.com" crossOrigin="" />
+        <link rel="preconnect" href="https://www.youtube.com" crossOrigin="" />
         <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="" />
+        <link rel="preconnect" href="https://yt3.ggpht.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
       </head>
       <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <ScrollProgress />
