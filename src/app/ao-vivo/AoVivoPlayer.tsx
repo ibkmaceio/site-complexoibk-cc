@@ -1,14 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CHURCH_INFO, PROGRAMACAO } from "@/lib/data/mock";
 import videosData from "@/lib/data/videos.json";
 
 const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
 const ultimoCulto = videosData.ibk[1] ?? videosData.ibk[0];
 
+// Janelas em que há culto ao vivo (timezone do navegador — funciona para o público local em Maceió/Brasil).
+// Cada janela cobre o horário do culto + folga de 30 min antes e 90 min depois para acomodar atrasos e duração variável.
+type Janela = { dia: number; inicio: number; fim: number };
+const JANELAS_LIVE: Janela[] = [
+  { dia: 0, inicio: 8.5, fim: 11 },     // Domingo 9h00 → 8h30–11h00
+  { dia: 0, inicio: 18, fim: 20.5 },    // Domingo 18h30 → 18h00–20h30
+  { dia: 3, inicio: 19, fim: 21.5 },    // Quarta 19h30 → 19h00–21h30
+  { dia: 6, inicio: 17.5, fim: 20 },    // Sábado 18h00 → 17h30–20h00
+];
+
+function estaEmHorarioDeCulto(): boolean {
+  const agora = new Date();
+  const dia = agora.getDay();
+  const hora = agora.getHours() + agora.getMinutes() / 60;
+  return JANELAS_LIVE.some((j) => j.dia === dia && hora >= j.inicio && hora < j.fim);
+}
+
 export default function AoVivoPlayer() {
+  // Default false para SSR (evita hydration mismatch). Após hidratar, decide pelo horário.
   const [live, setLive] = useState(false);
+
+  useEffect(() => {
+    if (estaEmHorarioDeCulto()) setLive(true);
+  }, []);
 
   const src = live
     ? `https://www.youtube-nocookie.com/embed/live_stream?channel=${CHANNEL_ID}&autoplay=1`
