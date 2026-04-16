@@ -12,8 +12,8 @@ export default function HeroSection() {
       <HeroVideo />
 
       {/* Gradientes */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
 
       {/* Conteúdo — renderizado pelo servidor, sem esperar JS */}
       <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-16 pt-24 sm:pb-20 sm:pt-28 lg:pb-20 lg:pt-32">
