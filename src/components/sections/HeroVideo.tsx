@@ -20,7 +20,8 @@ export default function HeroVideo() {
           objectFit: "cover",
         }}
       >
-        <source src="/assets/video/hero.mp4" type="video/mp4" />
+        <source src="/assets/video/hero-desktop.mp4" type="video/mp4" media="(min-width: 768px)" />
+        <source src="/assets/video/hero-mobile.mp4" type="video/mp4" />
       </video>
     </div>
   );
