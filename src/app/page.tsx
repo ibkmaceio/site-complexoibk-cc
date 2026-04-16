@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: "https://ibkmaceio.com.br",
     images: [
       {
-        url: "https://ibkmaceio.com.br/assets/img/ibk-maceio-templo-3000-lugares-auditorio.webp",
+        url: "https://ibkmaceio.com.br/assets/og/og-default-v2.png",
         width: 1200,
         height: 630,
         alt: "IBK — Igreja Batista Koinonia Maceió",
