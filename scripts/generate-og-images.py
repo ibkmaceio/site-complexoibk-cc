@@ -54,6 +54,17 @@ def dark_overlay(img, from_alpha=140, to_alpha=230):
     return Image.alpha_composite(base, overlay)
 
 
+def vertical_overlay(img, from_alpha=0, to_alpha=220):
+    """Gradiente vertical — topo claro, base escura — para legibilidade."""
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    for y in range(img.size[1]):
+        a = int(from_alpha + (to_alpha - from_alpha) * (y / img.size[1]) ** 1.6)
+        draw.line([(0, y), (img.size[0], y)], fill=(10, 10, 12, a))
+    base = img.convert("RGBA")
+    return Image.alpha_composite(base, overlay)
+
+
 def paste_logo(canvas, max_h=56, pos=(64, 56)):
     logo = Image.open(LOGO_PATH).convert("RGBA")
     ratio = max_h / logo.height
@@ -71,38 +82,53 @@ def draw_text(canvas, xy, text, fnt, fill=WHITE):
 # OG 1 — Default (compartilhar o site)
 # ═════════════════════════════════════════════════════
 def gen_og_default():
-    bg = load_bg(IMG_DIR / "ibk-maceio-complexo-novo-templo-fachada.webp")
-    canvas = dark_overlay(bg, from_alpha=140, to_alpha=230)
+    bg = load_bg(IMG_DIR / "ibk-maceio-coral-ministerio-musica.webp")
+    # Gradiente vertical: topo quase limpo (fachada visível), base escura (texto legível)
+    canvas = vertical_overlay(bg, from_alpha=20, to_alpha=235)
+
+    draw = ImageDraw.Draw(canvas)
 
     # Logo superior esquerdo
-    paste_logo(canvas, max_h=52, pos=(64, 64))
+    paste_logo(canvas, max_h=54, pos=(64, 60))
 
-    # Linha de acento laranja (eyebrow)
-    draw = ImageDraw.Draw(canvas)
-    draw.rectangle([(64, 258), (104, 262)], fill=ACCENT)
+    # ── Bloco de texto ancorado na base ──
+    # Linha de acento laranja
+    draw.rectangle([(64, 358), (108, 362)], fill=ACCENT)
 
-    # Eyebrow text
-    eyebrow = font(18, index=2)  # Regular
-    draw.text((124, 250), "IGREJA BATISTA KOINONIA · MACEIÓ, AL", font=eyebrow, fill=(255, 255, 255, 210))
+    # Eyebrow
+    eyebrow = font(19, index=1)  # Bold
+    draw.text((124, 350), "IGREJA BATISTA KOINONIA · MACEIÓ, AL", font=eyebrow, fill=(255, 255, 255, 220))
 
-    # Headline principal (duas linhas, bold enorme)
-    h1 = font(92, index=1)  # Bold
-    h1_italic = font(92, index=3)  # Bold Italic
-    draw.text((62, 296), "Você foi feito", font=h1, fill=WHITE)
-    draw.text((62, 400), "para ", font=h1, fill=WHITE)
-    # "pertencer." em itálico, calculando o offset
-    bbox = draw.textbbox((62, 400), "para ", font=h1)
+    # Headline — duas linhas, bold enorme, sombra leve pra garantir legibilidade
+    h1 = font(96, index=1)
+    h1_italic = font(96, index=3)
+
+    # Sombra: escreve 3px deslocado em preto translúcido
+    def draw_with_shadow(xy, text, fnt, fill=WHITE):
+        sx, sy = xy
+        draw.text((sx + 2, sy + 3), text, font=fnt, fill=(0, 0, 0, 140))
+        draw.text(xy, text, font=fnt, fill=fill)
+
+    draw_with_shadow((62, 386), "Você foi feito", h1)
+    draw_with_shadow((62, 492), "para ", h1)
+    bbox = draw.textbbox((62, 492), "para ", font=h1)
     x_italic = bbox[2]
-    draw.text((x_italic, 400), "pertencer.", font=h1_italic, fill=(255, 255, 255, 240))
+    draw_with_shadow((x_italic, 492), "pertencer.", h1_italic, fill=(255, 255, 255, 245))
 
-    # Rodapé: URL
+    # ── Rodapé ──
+    # Linha fina laranja acima do URL
+    draw.rectangle([(64, 590), (120, 592)], fill=ACCENT)
     url_font = font(20, index=1)
-    draw.text((64, 556), "ibkmaceio.com.br", font=url_font, fill=ACCENT)
+    draw.text((64, 600), "ibkmaceio.com.br", font=url_font, fill=WHITE)
 
-    # Linha sutil no rodapé direito
-    draw.rectangle([(W - 104, 564), (W - 64, 568)], fill=ACCENT)
+    # Canto direito inferior: texto "descubra +"
+    right_font = font(18, index=2)
+    right_text = "CONHEÇA NOSSA FAMÍLIA"
+    right_bbox = draw.textbbox((0, 0), right_text, font=right_font)
+    right_w = right_bbox[2] - right_bbox[0]
+    draw.text((W - 64 - right_w, 602), right_text, font=right_font, fill=(255, 255, 255, 180))
 
-    out = OUT_DIR / "og-default.png"
+    out = OUT_DIR / "og-default-v2.png"
     canvas.convert("RGB").save(out, "PNG", optimize=True)
     print(f"✓ {out.relative_to(ROOT)}")
 
@@ -112,7 +138,7 @@ def gen_og_default():
 # ═════════════════════════════════════════════════════
 def gen_og_live():
     # Fundo: foto da congregação com overlay bem escuro
-    bg = load_bg(IMG_DIR / "ibk-maceio-congregacao-adoracao-culto.webp")
+    bg = load_bg(IMG_DIR / "ibk-maceio-auditorio-culto-congregacao.webp")
     # Blur leve para dar foco no texto
     bg = bg.filter(ImageFilter.GaussianBlur(radius=3))
     canvas = dark_overlay(bg, from_alpha=180, to_alpha=240)
