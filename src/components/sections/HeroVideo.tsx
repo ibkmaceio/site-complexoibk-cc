@@ -6,7 +6,7 @@ export default function HeroVideo() {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         className="hero-video"
         style={{
           position: "absolute",
