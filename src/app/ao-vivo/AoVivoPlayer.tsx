@@ -6,7 +6,7 @@ import videosData from "@/lib/data/videos.json";
 import { checkLive } from "@/lib/utils/check-live";
 
 const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
-const ultimoCulto = videosData.ibk[1] ?? videosData.ibk[0];
+const ultimoCulto = videosData.ibk[0];
 
 export default function AoVivoPlayer() {
   // Default false para SSR (evita hydration mismatch).

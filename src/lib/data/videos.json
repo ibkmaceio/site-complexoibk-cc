@@ -1,6 +1,12 @@
 {
   "ibk": [
     {
+      "id": "tqLFFuUg1yU",
+      "titulo": "Culto da Palavra | 15.04",
+      "data": "2026-04-16",
+      "thumbnail": "https://i.ytimg.com/vi/tqLFFuUg1yU/hqdefault.jpg"
+    },
+    {
       "id": "yFw_kpeSds8",
       "titulo": "Culto da Família | 12.04",
       "data": "2026-04-13",
@@ -23,15 +29,27 @@
       "titulo": "Seja bem-vindo à IBK Maceió. Inscreva-se no canal e acompanhe tudo o que Deus tem feito entre nós.",
       "data": "2026-04-12",
       "thumbnail": "https://i.ytimg.com/vi/mvILffB2f5A/hqdefault.jpg"
-    },
-    {
-      "id": "VOOwK7csjxM",
-      "titulo": "O que fazer quando Deus está em silêncio | IBKAST EP 04",
-      "data": "2026-04-10",
-      "thumbnail": "https://i.ytimg.com/vi/VOOwK7csjxM/hqdefault.jpg"
     }
   ],
   "pedro": [
+    {
+      "id": "iszu2xHcSRc",
+      "titulo": "Ele está conosco! Lc 8.24",
+      "data": "2026-04-16",
+      "thumbnail": "https://i.ytimg.com/vi/iszu2xHcSRc/hqdefault.jpg"
+    },
+    {
+      "id": "NiyDCUynMak",
+      "titulo": "Dever de Testemunhar Lc 8.12",
+      "data": "2026-04-15",
+      "thumbnail": "https://i.ytimg.com/vi/NiyDCUynMak/hqdefault.jpg"
+    },
+    {
+      "id": "Bo4ZlpE3xws",
+      "titulo": "Mulheres seguidoras! Lc 8.1-3",
+      "data": "2026-04-14",
+      "thumbnail": "https://i.ytimg.com/vi/Bo4ZlpE3xws/hqdefault.jpg"
+    },
     {
       "id": "d6Viu4g6Fik",
       "titulo": "Gratidão e Devoção",
@@ -43,24 +61,6 @@
       "titulo": "Misericórdia do Pai Lc 6.36",
       "data": "2026-04-11",
       "thumbnail": "https://i.ytimg.com/vi/6Ynjx-Z3Ixg/hqdefault.jpg"
-    },
-    {
-      "id": "nNqJd3ZbmnI",
-      "titulo": "Orar para decidir Lc 6.12,13",
-      "data": "2026-04-07",
-      "thumbnail": "https://i.ytimg.com/vi/nNqJd3ZbmnI/hqdefault.jpg"
-    },
-    {
-      "id": "nAfkBLwf67k",
-      "titulo": "De olho nos perdidos Lc 5.31",
-      "data": "2026-04-07",
-      "thumbnail": "https://i.ytimg.com/vi/nAfkBLwf67k/hqdefault.jpg"
-    },
-    {
-      "id": "SsduBoz7UQ0",
-      "titulo": "Sábia obediência Lc 5.5",
-      "data": "2026-04-04",
-      "thumbnail": "https://i.ytimg.com/vi/SsduBoz7UQ0/hqdefault.jpg"
     }
   ],
   "podcasts": [
@@ -95,5 +95,5 @@
       "thumbnail": "https://i.ytimg.com/vi/sCk__3GN-lU/hqdefault.jpg"
     }
   ],
-  "updatedAt": "2026-04-13T20:01:26.355Z"
+  "updatedAt": "2026-04-16T18:28:12.338Z"
 }
