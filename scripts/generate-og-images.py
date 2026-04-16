@@ -71,8 +71,8 @@ def draw_text(canvas, xy, text, fnt, fill=WHITE):
 # OG 1 — Default (compartilhar o site)
 # ═════════════════════════════════════════════════════
 def gen_og_default():
-    bg = load_bg(IMG_DIR / "ibk-maceio-templo-3000-lugares-auditorio.webp")
-    canvas = dark_overlay(bg, from_alpha=120, to_alpha=220)
+    bg = load_bg(IMG_DIR / "ibk-maceio-complexo-novo-templo-fachada.webp")
+    canvas = dark_overlay(bg, from_alpha=140, to_alpha=230)
 
     # Logo superior esquerdo
     paste_logo(canvas, max_h=52, pos=(64, 64))
