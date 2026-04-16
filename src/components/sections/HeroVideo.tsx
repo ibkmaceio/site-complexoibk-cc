@@ -1,12 +1,13 @@
 const VIDEO_ID = "WfIY1iTRjPg";
-const SRC = `https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3`;
+const SRC = `https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1`;
 
 export default function HeroVideo() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none bg-ibk-dark-deep">
       <iframe
         src={SRC}
-        allow="autoplay; encrypted-media"
+        allow="autoplay; encrypted-media; picture-in-picture; accelerometer; gyroscope"
+        allowFullScreen
         loading="eager"
         className="hero-video-iframe"
         style={{
