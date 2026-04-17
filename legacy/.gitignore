@@ -1,9 +1,0 @@
-# Mídia enviada por usuários — não vai para git
-cms/assets/uploads/
-
-# Cache gerado — não vai para git
-cms/cache/
-
-# Backups de arquivos grandes — não vai para git
-*.tar.gz
-site_files_*.tar.gz
