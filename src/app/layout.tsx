@@ -104,6 +104,10 @@ export default function RootLayout({
       className={`${outfit.variable} ${dmSans.variable} ${cormorant.variable} h-full`}
     >
       <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/assets/logo/logo-escudo.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="preconnect" href="https://www.youtube-nocookie.com" crossOrigin="" />
         <link rel="preconnect" href="https://www.youtube.com" crossOrigin="" />
         <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="" />
