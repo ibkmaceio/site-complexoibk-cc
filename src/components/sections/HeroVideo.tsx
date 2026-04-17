@@ -17,17 +17,16 @@ export default function HeroVideo() {
 
     // muted via JS é necessário para iOS Safari respeitar autoplay
     video.muted = true;
-    video.load();
 
     const tryPlay = () => {
       video.play().catch(() => {});
     };
 
-    // Tenta assim que tiver dados suficientes para reproduzir
-    video.addEventListener("canplaythrough", tryPlay, { once: true });
+    // Tenta imediatamente — browser faz fila até ter dados suficientes
+    tryPlay();
 
-    // Fallback: se já carregou (readyState 4 = HAVE_ENOUGH_DATA)
-    if (video.readyState >= 4) tryPlay();
+    // Backup: se o play imediato falhou por readyState insuficiente
+    video.addEventListener("canplay", tryPlay, { once: true });
 
     const onVisibility = () => {
       if (document.visibilityState === "visible") tryPlay();
@@ -35,7 +34,7 @@ export default function HeroVideo() {
     document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
-      video.removeEventListener("canplaythrough", tryPlay);
+      video.removeEventListener("canplay", tryPlay);
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
