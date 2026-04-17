@@ -1,29 +1,44 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [src, setSrc] = useState<string | null>(null);
-
-  useEffect(() => {
-    const mql = window.matchMedia("(min-width: 768px)");
-    const resolve = () =>
-      setSrc(mql.matches ? "/assets/video/hero-desktop.mp4" : "/assets/video/hero-mobile.mp4");
-    resolve();
-    mql.addEventListener("change", resolve);
-    return () => mql.removeEventListener("change", resolve);
-  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !src) return;
-    video.load();
-    const tryPlay = () => video.play().catch(() => {});
+    if (!video) return;
+
+    video.muted = true;
+
+    const tryPlay = () => {
+      const p = video.play();
+      if (p !== undefined) p.catch(() => {});
+    };
+
     tryPlay();
-    video.addEventListener("canplay", tryPlay, { once: true });
-    return () => video.removeEventListener("canplay", tryPlay);
-  }, [src]);
+
+    const onCanPlay = () => tryPlay();
+    const onLoadedData = () => tryPlay();
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") tryPlay();
+    };
+    const onUserGesture = () => tryPlay();
+
+    video.addEventListener("canplay", onCanPlay);
+    video.addEventListener("loadeddata", onLoadedData);
+    document.addEventListener("visibilitychange", onVisibility);
+    document.addEventListener("touchstart", onUserGesture, { once: true, passive: true });
+    document.addEventListener("click", onUserGesture, { once: true });
+
+    return () => {
+      video.removeEventListener("canplay", onCanPlay);
+      video.removeEventListener("loadeddata", onLoadedData);
+      document.removeEventListener("visibilitychange", onVisibility);
+      document.removeEventListener("touchstart", onUserGesture);
+      document.removeEventListener("click", onUserGesture);
+    };
+  }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none bg-ibk-dark-deep">
@@ -34,6 +49,10 @@ export default function HeroVideo() {
         loop
         playsInline
         preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
+        aria-hidden="true"
+        tabIndex={-1}
         className="hero-video"
         style={{
           position: "absolute",
@@ -46,8 +65,14 @@ export default function HeroVideo() {
           transform: "translate(-50%, -50%)",
           objectFit: "cover",
         }}
-        src={src ?? undefined}
-      />
+      >
+        <source
+          src="/assets/video/hero-desktop.mp4"
+          type="video/mp4"
+          media="(min-width: 768px)"
+        />
+        <source src="/assets/video/hero-mobile.mp4" type="video/mp4" />
+      </video>
     </div>
   );
 }
