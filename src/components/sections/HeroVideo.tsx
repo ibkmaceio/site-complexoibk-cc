@@ -9,34 +9,34 @@ export default function HeroVideo() {
     const video = videoRef.current;
     if (!video) return;
 
+    // iOS Safari ignora media attribute em <source> de <video> — detectar via JS
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    video.src = isMobile
+      ? "/assets/video/hero-mobile.mp4"
+      : "/assets/video/hero-desktop.mp4";
+
+    // muted via JS é necessário para iOS Safari respeitar autoplay
     video.muted = true;
+    video.load();
 
     const tryPlay = () => {
-      const p = video.play();
-      if (p !== undefined) p.catch(() => {});
+      video.play().catch(() => {});
     };
 
-    tryPlay();
+    // Tenta assim que tiver dados suficientes para reproduzir
+    video.addEventListener("canplaythrough", tryPlay, { once: true });
 
-    const onCanPlay = () => tryPlay();
-    const onLoadedData = () => tryPlay();
+    // Fallback: se já carregou (readyState 4 = HAVE_ENOUGH_DATA)
+    if (video.readyState >= 4) tryPlay();
+
     const onVisibility = () => {
       if (document.visibilityState === "visible") tryPlay();
     };
-    const onUserGesture = () => tryPlay();
-
-    video.addEventListener("canplay", onCanPlay);
-    video.addEventListener("loadeddata", onLoadedData);
     document.addEventListener("visibilitychange", onVisibility);
-    document.addEventListener("touchstart", onUserGesture, { once: true, passive: true });
-    document.addEventListener("click", onUserGesture, { once: true });
 
     return () => {
-      video.removeEventListener("canplay", onCanPlay);
-      video.removeEventListener("loadeddata", onLoadedData);
+      video.removeEventListener("canplaythrough", tryPlay);
       document.removeEventListener("visibilitychange", onVisibility);
-      document.removeEventListener("touchstart", onUserGesture);
-      document.removeEventListener("click", onUserGesture);
     };
   }, []);
 
@@ -65,14 +65,7 @@ export default function HeroVideo() {
           transform: "translate(-50%, -50%)",
           objectFit: "cover",
         }}
-      >
-        <source
-          src="/assets/video/hero-desktop.mp4"
-          type="video/mp4"
-          media="(min-width: 768px)"
-        />
-        <source src="/assets/video/hero-mobile.mp4" type="video/mp4" />
-      </video>
+      />
     </div>
   );
 }
