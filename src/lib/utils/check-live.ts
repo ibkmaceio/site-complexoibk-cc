@@ -4,7 +4,12 @@
 const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
 const API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 const CACHE_KEY = "ibk_live_check_v1";
-const CACHE_TTL_MS = 2 * 60 * 1000;
+// Cache adaptativo: 2 min dentro do horário de culto (±30 min), 30 min fora.
+// Reduz ~90% das chamadas à API search (100 unidades) — só consulta com frequência
+// quando há chance real de live. Lives fora do programado são detectadas em até 30 min.
+const CACHE_TTL_ACTIVE_MS = 2 * 60 * 1000;
+const CACHE_TTL_IDLE_MS = 30 * 60 * 1000;
+const SERVICE_BUFFER_HOURS = 0.5;
 
 const COMPLETED_CACHE_KEY = "ibk_last_completed_v1";
 const COMPLETED_TTL_MS = 3 * 60 * 1000;
@@ -27,11 +32,13 @@ const JANELAS_LIVE: Janela[] = [
   { dia: 6, inicio: 17.5, fim: 20 },
 ];
 
-export function estaEmHorarioDeCulto(): boolean {
+export function estaEmHorarioDeCulto(bufferHoras = 0): boolean {
   const agora = new Date();
   const dia = agora.getDay();
   const hora = agora.getHours() + agora.getMinutes() / 60;
-  return JANELAS_LIVE.some((j) => j.dia === dia && hora >= j.inicio && hora < j.fim);
+  return JANELAS_LIVE.some(
+    (j) => j.dia === dia && hora >= j.inicio - bufferHoras && hora < j.fim + bufferHoras,
+  );
 }
 
 export type LiveCheck = { isLive: boolean; videoId: string | null; ts: number };
@@ -85,7 +92,9 @@ function trackLiveTransition(isLive: boolean, videoId?: string | null) {
 }
 
 export async function checkLive(): Promise<LiveCheck> {
-  const cached = readCache<LiveCheck>(CACHE_KEY, CACHE_TTL_MS);
+  // TTL adaptativo: cache curto em horário de culto, longo fora dele
+  const ttl = estaEmHorarioDeCulto(SERVICE_BUFFER_HOURS) ? CACHE_TTL_ACTIVE_MS : CACHE_TTL_IDLE_MS;
+  const cached = readCache<LiveCheck>(CACHE_KEY, ttl);
   if (cached) return cached;
 
   if (!API_KEY) {
