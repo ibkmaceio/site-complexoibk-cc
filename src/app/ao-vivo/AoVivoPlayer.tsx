@@ -45,7 +45,7 @@ export default function AoVivoPlayer() {
         lastCompletedIdRef.current = id;
         setLastCompletedId(id);
       }
-    }, 2 * 60_000);
+    }, 3 * 60_000);
 
     return () => clearInterval(interval);
   }, []);

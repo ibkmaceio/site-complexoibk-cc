@@ -9,13 +9,13 @@ const CACHE_TTL_MS = 2 * 60 * 1000;
 const COMPLETED_CACHE_KEY = "ibk_last_completed_v1";
 const COMPLETED_TTL_MS = 3 * 60 * 1000;
 
-// Retry pós-live: 10 min, intervalo 2 min.
+// Retry pós-live: 10 min, intervalo 3 min.
 // Usa videos.list (1 unidade) em vez de search (100 unidades) — 99% mais barato.
 const POST_LIVE_UNTIL_KEY  = "ibk_post_live_until_v1";
 const POST_LIVE_RETRY_KEY  = "ibk_post_live_retry_v1";
 const LIVE_VIDEO_ID_KEY    = "ibk_live_video_id_v1"; // salvo durante a live para o retry
 const POST_LIVE_DURATION_MS  = 10 * 60 * 1000;
-const POST_LIVE_INTERVAL_MS  =  2 * 60 * 1000;
+const POST_LIVE_INTERVAL_MS  =  3 * 60 * 1000;
 
 const LAST_LIVE_FLAG = "ibk_was_live_v1";
 
