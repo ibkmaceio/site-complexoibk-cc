@@ -19,10 +19,14 @@ if (!API_KEY) {
   process.exit(1);
 }
 
+// API key tem restrição HTTP referrer = ibkmaceio.com.br — passamos manualmente
+// para a API aceitar requests do GitHub Actions.
+const REFERER_HEADER = { Referer: "https://ibkmaceio.com.br/" };
+
 async function fetchLiveStatus() {
   // Passo 1: pegar 5 últimos uploads (1 unidade)
   const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=${UPLOADS_PLAYLIST_ID}&maxResults=5&key=${API_KEY}`;
-  const playlistRes = await fetch(playlistUrl);
+  const playlistRes = await fetch(playlistUrl, { headers: REFERER_HEADER });
   if (!playlistRes.ok) throw new Error(`playlistItems HTTP ${playlistRes.status}`);
   const playlistData = await playlistRes.json();
   const ids = (playlistData.items ?? [])
@@ -33,7 +37,7 @@ async function fetchLiveStatus() {
 
   // Passo 2: batch check liveStreamingDetails (1 unidade)
   const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${ids.join(",")}&key=${API_KEY}`;
-  const videosRes = await fetch(videosUrl);
+  const videosRes = await fetch(videosUrl, { headers: REFERER_HEADER });
   if (!videosRes.ok) throw new Error(`videos HTTP ${videosRes.status}`);
   const videosData = await videosRes.json();
 
