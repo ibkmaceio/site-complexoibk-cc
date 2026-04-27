@@ -184,24 +184,28 @@ export async function checkLive(): Promise<LiveCheck> {
   }
 }
 
-// Retorna o videoId do último culto gravado — usado em "Último Culto".
+export type LastVideo = { videoId: string; title: string; ts: number };
+
+// Retorna o último culto gravado (videoId + title) — usado em "Último Culto".
 //
-// Retry pós-live (8 min, intervalo 90s):
-//   Usa videos.list com o liveVideoId salvo = 1 unidade de quota por chamada.
-//   O YouTube mantém o mesmo videoId após converter de live para gravado.
-//   Fallback para search (100 unidades) apenas se não houver liveVideoId salvo.
-export async function getLastCompletedLive(): Promise<string | null> {
+// Estratégia:
+//   - Outside post-live: pega 5 últimos uploads + ordena por actualEndTime
+//     descendente (cronológico, não data de upload — corrige caso de
+//     vídeo editado/repostado depois). Custo: 2 unidades.
+//   - Inside post-live (10 min após fim): checa videoId salvo via videos.list
+//     com processingStatus + privacyStatus + embeddable. Custo: 1 unidade.
+export async function getLastCompletedLive(): Promise<LastVideo | null> {
   const postLive = isInPostLiveWindow();
 
   if (!postLive) {
-    const cached = readCache<{ videoId: string; ts: number }>(COMPLETED_CACHE_KEY, COMPLETED_TTL_MS);
-    if (cached) return cached.videoId;
+    const cached = readCache<LastVideo>(COMPLETED_CACHE_KEY, COMPLETED_TTL_MS);
+    if (cached) return cached;
   } else {
     try {
       const lastRetry = Number(localStorage.getItem(POST_LIVE_RETRY_KEY) ?? "0");
       if (Date.now() - lastRetry < POST_LIVE_INTERVAL_MS) {
-        const stale = readCache<{ videoId: string; ts: number }>(COMPLETED_CACHE_KEY, Infinity);
-        return stale ? stale.videoId : null;
+        const stale = readCache<LastVideo>(COMPLETED_CACHE_KEY, Infinity);
+        return stale ?? null;
       }
       localStorage.setItem(POST_LIVE_RETRY_KEY, String(Date.now()));
     } catch {}
@@ -209,46 +213,84 @@ export async function getLastCompletedLive(): Promise<string | null> {
 
   if (!API_KEY) return null;
 
-  // Durante retry pós-live: verificar se o vídeo da live já está pronto para
-  // tocar via videos.list (1 unidade) em vez de search (100 unidades).
-  // Só declara pronto quando processingStatus=succeeded, embeddable=true e public —
-  // o iframe falha em qualquer outro estado.
+  // Inside post-live: verifica o vídeo da live recém-encerrada
   if (postLive) {
     try {
       const savedId = localStorage.getItem(LIVE_VIDEO_ID_KEY);
       if (savedId) {
-        const url = `https://www.googleapis.com/youtube/v3/videos?part=status,processingDetails&id=${savedId}&key=${API_KEY}`;
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=status,processingDetails,snippet&id=${savedId}&key=${API_KEY}`;
         const res = await fetch(url);
         if (res.ok) {
           const data = await res.json();
           const item = (data.items ?? [])[0] as
-            | { status?: { privacyStatus?: string; embeddable?: boolean }; processingDetails?: { processingStatus?: string } }
+            | {
+                status?: { privacyStatus?: string; embeddable?: boolean };
+                processingDetails?: { processingStatus?: string };
+                snippet?: { title?: string };
+              }
             | undefined;
           const ready =
             item?.processingDetails?.processingStatus === "succeeded" &&
             item?.status?.privacyStatus === "public" &&
             item?.status?.embeddable === true;
           if (ready) {
-            writeCache(COMPLETED_CACHE_KEY, { videoId: savedId, ts: Date.now() });
-            return savedId;
+            const result: LastVideo = {
+              videoId: savedId,
+              title: item?.snippet?.title ?? "Último culto",
+              ts: Date.now(),
+            };
+            writeCache(COMPLETED_CACHE_KEY, result);
+            return result;
           }
         }
-        // Ainda processando ou não public/embeddable — próxima tentativa
-        return null;
+        return null; // ainda processando
       }
     } catch {}
-    // Sem liveVideoId salvo: cai no search abaixo (raro — só em sessão nova)
   }
 
+  // Outside post-live: pega últimos 5 uploads e ordena por actualEndTime
   try {
-    const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${CHANNEL_ID}&eventType=completed&type=video&order=date&maxResults=1&key=${API_KEY}`;
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    const data = await res.json();
-    const items: Array<{ id?: { videoId?: string } }> = data.items || [];
-    const videoId = items[0]?.id?.videoId ?? null;
-    if (videoId) writeCache(COMPLETED_CACHE_KEY, { videoId, ts: Date.now() });
-    return videoId;
+    const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=${UPLOADS_PLAYLIST_ID}&maxResults=5&key=${API_KEY}`;
+    const playlistRes = await fetch(playlistUrl);
+    if (!playlistRes.ok) return null;
+    const playlistData = await playlistRes.json();
+    const ids = (playlistData.items ?? [])
+      .map((it: { contentDetails?: { videoId?: string } }) => it.contentDetails?.videoId)
+      .filter((id: string | undefined): id is string => !!id);
+
+    if (ids.length === 0) return null;
+
+    const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails,snippet&id=${ids.join(",")}&key=${API_KEY}`;
+    const videosRes = await fetch(videosUrl);
+    if (!videosRes.ok) return null;
+    const videosData = await videosRes.json();
+
+    type VideoItem = {
+      id?: string;
+      snippet?: { title?: string };
+      liveStreamingDetails?: { actualEndTime?: string };
+    };
+
+    // Filtra só lives encerradas e ordena por actualEndTime descendente —
+    // reflete a ordem CRONOLÓGICA dos cultos (não a ordem de upload).
+    const completed = (videosData.items ?? [])
+      .filter((v: VideoItem) => v.liveStreamingDetails?.actualEndTime)
+      .sort((a: VideoItem, b: VideoItem) => {
+        const ta = new Date(a.liveStreamingDetails!.actualEndTime!).getTime();
+        const tb = new Date(b.liveStreamingDetails!.actualEndTime!).getTime();
+        return tb - ta;
+      }) as VideoItem[];
+
+    const last = completed[0];
+    if (!last?.id) return null;
+
+    const result: LastVideo = {
+      videoId: last.id,
+      title: last.snippet?.title ?? "Último culto",
+      ts: Date.now(),
+    };
+    writeCache(COMPLETED_CACHE_KEY, result);
+    return result;
   } catch {
     return null;
   }

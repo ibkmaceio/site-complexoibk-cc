@@ -7,13 +7,13 @@ import { checkLive, getLastCompletedLive, isInPostLiveWindow } from "@/lib/utils
 import LiveDebugOverlay from "@/components/ui/LiveDebugOverlay";
 
 const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
-const fallbackId = videosData.ibk[0].id;
+const fallbackVideo = { id: videosData.ibk[0].id, title: videosData.ibk[0].titulo };
 
 export default function AoVivoPlayer() {
   const [live, setLive] = useState(false);
   const [liveVideoId, setLiveVideoId] = useState<string | null>(null);
-  const [lastCompletedId, setLastCompletedId] = useState<string>(fallbackId);
-  const lastCompletedIdRef = useRef(fallbackId);
+  const [lastVideo, setLastVideo] = useState(fallbackVideo);
+  const lastVideoIdRef = useRef(fallbackVideo.id);
 
   useEffect(() => {
     checkLive().then((result) => {
@@ -23,16 +23,16 @@ export default function AoVivoPlayer() {
       }
     });
 
-    getLastCompletedLive().then((id) => {
-      if (id) {
-        setLastCompletedId(id);
-        lastCompletedIdRef.current = id;
+    getLastCompletedLive().then((v) => {
+      if (v) {
+        setLastVideo({ id: v.videoId, title: v.title });
+        lastVideoIdRef.current = v.videoId;
       }
     });
   }, []);
 
-  // Retry pós-live: enquanto dentro da janela de 15 min após encerrar a live,
-  // re-tenta a cada 60s até o YouTube processar e disponibilizar o vídeo gravado.
+  // Retry pós-live: enquanto dentro da janela de 10 min após encerrar a live,
+  // re-tenta a cada 3 min até o YouTube processar e disponibilizar o vídeo gravado.
   useEffect(() => {
     if (!isInPostLiveWindow()) return;
 
@@ -41,10 +41,10 @@ export default function AoVivoPlayer() {
         clearInterval(interval);
         return;
       }
-      const id = await getLastCompletedLive();
-      if (id && id !== lastCompletedIdRef.current) {
-        lastCompletedIdRef.current = id;
-        setLastCompletedId(id);
+      const v = await getLastCompletedLive();
+      if (v && v.videoId !== lastVideoIdRef.current) {
+        lastVideoIdRef.current = v.videoId;
+        setLastVideo({ id: v.videoId, title: v.title });
       }
     }, 3 * 60_000);
 
@@ -55,7 +55,7 @@ export default function AoVivoPlayer() {
     ? liveVideoId
       ? `https://www.youtube-nocookie.com/embed/${liveVideoId}?autoplay=1&rel=0`
       : `https://www.youtube-nocookie.com/embed/live_stream?channel=${CHANNEL_ID}&autoplay=1&rel=0`
-    : `https://www.youtube-nocookie.com/embed/${lastCompletedId}?rel=0`;
+    : `https://www.youtube-nocookie.com/embed/${lastVideo.id}?rel=0`;
 
   return (
     <>
@@ -123,7 +123,7 @@ export default function AoVivoPlayer() {
             </button>
           </p>
         ) : (
-          <p className="text-white/30 font-body text-xs truncate">{videosData.ibk[0].titulo}</p>
+          <p className="text-white/30 font-body text-xs truncate">{lastVideo.title}</p>
         )}
         <a
           href={CHURCH_INFO.youtube}
