@@ -9,16 +9,16 @@ const CACHE_TTL_MS = 2 * 60 * 1000;
 const COMPLETED_CACHE_KEY = "ibk_last_completed_v1";
 const COMPLETED_TTL_MS = 3 * 60 * 1000;
 
-// Janela de retry pós-live: por 15 min após encerrar, ignora cache e re-tenta
-// a cada 1 min — até o YouTube processar e disponibilizar o vídeo gravado.
-const POST_LIVE_UNTIL_KEY = "ibk_post_live_until_v1";
+// Retry pós-live: 10 min, intervalo 2 min.
+// Usa videos.list (1 unidade) em vez de search (100 unidades) — 99% mais barato.
+const POST_LIVE_UNTIL_KEY  = "ibk_post_live_until_v1";
 const POST_LIVE_RETRY_KEY  = "ibk_post_live_retry_v1";
-const POST_LIVE_DURATION_MS = 15 * 60 * 1000;
-const POST_LIVE_INTERVAL_MS =  1 * 60 * 1000;
+const LIVE_VIDEO_ID_KEY    = "ibk_live_video_id_v1"; // salvo durante a live para o retry
+const POST_LIVE_DURATION_MS  = 10 * 60 * 1000;
+const POST_LIVE_INTERVAL_MS  =  2 * 60 * 1000;
 
 const LAST_LIVE_FLAG = "ibk_was_live_v1";
 
-// Janelas de fallback se a API falhar — fuso do navegador, cobre o público local.
 type Janela = { dia: number; inicio: number; fim: number };
 const JANELAS_LIVE: Janela[] = [
   { dia: 0, inicio: 8.5, fim: 11 },
@@ -60,20 +60,21 @@ function clearCache(key: string) {
   } catch {}
 }
 
-// Retorna se estamos dentro da janela de retry pós-live (15 min após encerrar).
 export function isInPostLiveWindow(): boolean {
   try {
-    const until = Number(localStorage.getItem(POST_LIVE_UNTIL_KEY) ?? "0");
-    return Date.now() < until;
+    return Date.now() < Number(localStorage.getItem(POST_LIVE_UNTIL_KEY) ?? "0");
   } catch {
     return false;
   }
 }
 
-// Detecta transição live→offline e abre janela de retry de 15 min.
-function trackLiveTransition(isLive: boolean) {
+function trackLiveTransition(isLive: boolean, videoId?: string | null) {
   try {
     const wasLive = localStorage.getItem(LAST_LIVE_FLAG) === "1";
+    if (isLive && videoId) {
+      // Persiste o videoId da live — o mesmo ID será usado no vídeo gravado
+      localStorage.setItem(LIVE_VIDEO_ID_KEY, videoId);
+    }
     if (wasLive && !isLive) {
       clearCache(COMPLETED_CACHE_KEY);
       localStorage.setItem(POST_LIVE_UNTIL_KEY, String(Date.now() + POST_LIVE_DURATION_MS));
@@ -88,40 +89,33 @@ export async function checkLive(): Promise<LiveCheck> {
   if (cached) return cached;
 
   if (!API_KEY) {
-    const result: LiveCheck = { isLive: false, videoId: null, ts: Date.now() };
     trackLiveTransition(false);
-    return result;
+    return { isLive: false, videoId: null, ts: Date.now() };
   }
 
   try {
     const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${CHANNEL_ID}&eventType=live&type=video&key=${API_KEY}`;
     const res = await fetch(url);
-    if (!res.ok) throw new Error("YouTube API error");
+    if (!res.ok) throw new Error();
     const data = await res.json();
     const items: Array<{ id?: { videoId?: string } }> = data.items || [];
     const videoId = items[0]?.id?.videoId ?? null;
-    const result: LiveCheck = {
-      isLive: videoId !== null,
-      videoId,
-      ts: Date.now(),
-    };
+    const result: LiveCheck = { isLive: videoId !== null, videoId, ts: Date.now() };
     writeCache(CACHE_KEY, result);
-    trackLiveTransition(result.isLive);
+    trackLiveTransition(result.isLive, videoId);
     return result;
   } catch {
-    const result: LiveCheck = { isLive: false, videoId: null, ts: Date.now() };
     trackLiveTransition(false);
-    return result;
+    return { isLive: false, videoId: null, ts: Date.now() };
   }
 }
 
-// Retorna o videoId da live mais recente já encerrada — usado em "Último Culto".
+// Retorna o videoId do último culto gravado — usado em "Último Culto".
 //
-// Comportamento pós-live (até 15 min após encerrar):
-//   - Ignora cache de 3 min e re-tenta a cada 1 min até o YouTube processar.
-//   - Assim que o vídeo aparecer, salva no cache e para de re-tentar.
-//
-// Fora da janela pós-live: cache normal de 3 min.
+// Retry pós-live (8 min, intervalo 90s):
+//   Usa videos.list com o liveVideoId salvo = 1 unidade de quota por chamada.
+//   O YouTube mantém o mesmo videoId após converter de live para gravado.
+//   Fallback para search (100 unidades) apenas se não houver liveVideoId salvo.
 export async function getLastCompletedLive(): Promise<string | null> {
   const postLive = isInPostLiveWindow();
 
@@ -129,11 +123,9 @@ export async function getLastCompletedLive(): Promise<string | null> {
     const cached = readCache<{ videoId: string; ts: number }>(COMPLETED_CACHE_KEY, COMPLETED_TTL_MS);
     if (cached) return cached.videoId;
   } else {
-    // Dentro da janela pós-live: rate-limit a 1 chamada por minuto
     try {
       const lastRetry = Number(localStorage.getItem(POST_LIVE_RETRY_KEY) ?? "0");
       if (Date.now() - lastRetry < POST_LIVE_INTERVAL_MS) {
-        // Ainda não é hora de re-tentar — retorna cache atual (mesmo que expirado)
         const stale = readCache<{ videoId: string; ts: number }>(COMPLETED_CACHE_KEY, Infinity);
         return stale ? stale.videoId : null;
       }
@@ -142,6 +134,28 @@ export async function getLastCompletedLive(): Promise<string | null> {
   }
 
   if (!API_KEY) return null;
+
+  // Durante retry pós-live: verificar se o vídeo da live já está disponível
+  // via videos.list (1 unidade) em vez de search (100 unidades).
+  if (postLive) {
+    try {
+      const savedId = localStorage.getItem(LIVE_VIDEO_ID_KEY);
+      if (savedId) {
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=id&id=${savedId}&key=${API_KEY}`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          if ((data.items ?? []).length > 0) {
+            writeCache(COMPLETED_CACHE_KEY, { videoId: savedId, ts: Date.now() });
+            return savedId;
+          }
+        }
+        // Vídeo ainda não processado — próxima tentativa em 90s
+        return null;
+      }
+    } catch {}
+    // Sem liveVideoId salvo: cai no search abaixo (raro — só em sessão nova)
+  }
 
   try {
     const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${CHANNEL_ID}&eventType=completed&type=video&order=date&maxResults=1&key=${API_KEY}`;
