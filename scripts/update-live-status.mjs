@@ -57,20 +57,10 @@ try {
   const status = await fetchLiveStatus();
   const next = { ...status, ts: Date.now() };
 
-  // Detecta mudança real (ignora ts) — evita commits desnecessários
-  let changed = true;
-  if (existsSync(OUTPUT)) {
-    try {
-      const prev = JSON.parse(readFileSync(OUTPUT, "utf-8"));
-      changed = prev.isLive !== next.isLive || prev.videoId !== next.videoId;
-    } catch {}
-  }
-
   writeFileSync(OUTPUT, JSON.stringify(next, null, 2) + "\n");
-  console.log(`isLive=${next.isLive} videoId=${next.videoId ?? "—"} changed=${changed}`);
-
-  // Sai com código 0 se mudou (workflow vai commitar) ou 78 se não (skip commit)
-  process.exit(changed ? 0 : 78);
+  console.log(`isLive=${next.isLive} videoId=${next.videoId ?? "—"} ts=${next.ts}`);
+  // ts sempre muda — workflow sempre commita para o frontend confiar na frescor
+  // do dado (rejeita JSON com ts > 10 min como fallback de segurança).
 } catch (err) {
   console.error("Falha:", err.message);
   process.exit(1);

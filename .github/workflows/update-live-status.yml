@@ -34,22 +34,18 @@ jobs:
           node-version: 20
 
       - name: Run update script
-        id: update
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: |
-          set +e
-          node main-tree/scripts/update-live-status.mjs status-tree/live-status.json
-          code=$?
-          echo "code=$code" >> $GITHUB_OUTPUT
-          if [ $code -ne 0 ] && [ $code -ne 78 ]; then exit $code; fi
+        run: node main-tree/scripts/update-live-status.mjs status-tree/live-status.json
 
-      - name: Commit and push if changed
-        if: steps.update.outputs.code == '0'
+      - name: Commit and push
         working-directory: status-tree
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add live-status.json
           git commit -m "chore: update live-status [skip ci]"
-          git push origin live-status
+          # Squash para manter a branch live-status com poucos commits
+          git reset --soft $(git rev-list --max-parents=0 HEAD)
+          git commit --amend --no-edit --reset-author
+          git push --force origin live-status
