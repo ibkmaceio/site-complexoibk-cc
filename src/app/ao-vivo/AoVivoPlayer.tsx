@@ -3,15 +3,15 @@
 import { useState, useEffect } from "react";
 import { CHURCH_INFO, PROGRAMACAO } from "@/lib/data/mock";
 import videosData from "@/lib/data/videos.json";
-import { checkLive } from "@/lib/utils/check-live";
+import { checkLive, getLastCompletedLive } from "@/lib/utils/check-live";
 
 const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
-const ultimoCulto = videosData.ibk[0];
+const fallbackId = videosData.ibk[0].id;
 
 export default function AoVivoPlayer() {
-  // Default false para SSR (evita hydration mismatch).
   const [live, setLive] = useState(false);
   const [liveVideoId, setLiveVideoId] = useState<string | null>(null);
+  const [lastCompletedId, setLastCompletedId] = useState<string>(fallbackId);
 
   useEffect(() => {
     checkLive().then((result) => {
@@ -20,13 +20,17 @@ export default function AoVivoPlayer() {
         setLiveVideoId(result.videoId);
       }
     });
+
+    getLastCompletedLive().then((id) => {
+      if (id) setLastCompletedId(id);
+    });
   }, []);
 
   const src = live
     ? liveVideoId
       ? `https://www.youtube-nocookie.com/embed/${liveVideoId}?autoplay=1&rel=0`
       : `https://www.youtube-nocookie.com/embed/live_stream?channel=${CHANNEL_ID}&autoplay=1&rel=0`
-    : `https://www.youtube-nocookie.com/embed/${ultimoCulto.id}?rel=0`;
+    : `https://www.youtube-nocookie.com/embed/${lastCompletedId}?rel=0`;
 
   return (
     <section className="px-6 sm:px-10 lg:px-16 py-16 max-w-7xl mx-auto">
@@ -93,7 +97,7 @@ export default function AoVivoPlayer() {
             </button>
           </p>
         ) : (
-          <p className="text-white/30 font-body text-xs truncate">{ultimoCulto.titulo}</p>
+          <p className="text-white/30 font-body text-xs truncate">{videosData.ibk[0].titulo}</p>
         )}
         <a
           href={CHURCH_INFO.youtube}

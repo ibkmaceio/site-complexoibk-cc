@@ -17,25 +17,59 @@ export default function HeroVideo() {
 
     // muted via JS é necessário para iOS Safari respeitar autoplay
     video.muted = true;
+    video.playsInline = true;
+
+    let userPaused = false; // só respeita pause se foi o usuário (sem fallback aqui)
 
     const tryPlay = () => {
-      video.play().catch(() => {});
+      if (userPaused) return;
+      const p = video.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
     };
 
     // Tenta imediatamente — browser faz fila até ter dados suficientes
     tryPlay();
 
-    // Backup: se o play imediato falhou por readyState insuficiente
-    video.addEventListener("canplay", tryPlay, { once: true });
+    // Triggers de retry: cobrem readyState insuficiente, conexão lenta, e bfcache
+    const onCanPlay = () => tryPlay();
+    const onLoadedData = () => tryPlay();
+    const onLoadedMetadata = () => tryPlay();
+    video.addEventListener("canplay", onCanPlay);
+    video.addEventListener("loadeddata", onLoadedData);
+    video.addEventListener("loadedmetadata", onLoadedMetadata);
 
+    // Pause inesperado (low power, perda de foco breve) — auto-resume
+    const onPause = () => {
+      // Heurística: se a página está visível e não foi ação do usuário,
+      // o pause veio do sistema. Tentamos retomar.
+      if (document.visibilityState === "visible" && !userPaused) {
+        // pequeno delay para não brigar com o próprio motor do browser
+        setTimeout(tryPlay, 50);
+      }
+    };
+    video.addEventListener("pause", onPause);
+
+    // Retoma quando a aba volta a ficar visível
     const onVisibility = () => {
       if (document.visibilityState === "visible") tryPlay();
     };
     document.addEventListener("visibilitychange", onVisibility);
 
+    // bfcache: ao voltar via botão "voltar" do navegador, o vídeo é restaurado
+    // mas pode estar pausado e sem disparar canplay/loadeddata.
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) tryPlay();
+      else tryPlay(); // navegação normal — também tenta (idempotente)
+    };
+    window.addEventListener("pageshow", onPageShow);
+
     return () => {
-      video.removeEventListener("canplay", tryPlay);
+      video.removeEventListener("canplay", onCanPlay);
+      video.removeEventListener("loadeddata", onLoadedData);
+      video.removeEventListener("loadedmetadata", onLoadedMetadata);
+      video.removeEventListener("pause", onPause);
       document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pageshow", onPageShow);
     };
   }, []);
 

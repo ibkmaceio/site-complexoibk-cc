@@ -38,7 +38,7 @@ export default function HeroLiveCta({ defaultLabel }: Props) {
       href="/ao-vivo"
       className="flex items-center gap-3 px-8 py-4 border border-white/25 text-white font-display font-bold text-sm tracking-wide rounded hover:border-[#E84C1E] active:border-[#E84C1E] hover:text-white transition-all"
     >
-      <span className="w-2 h-2 rounded-full bg-[#E84C1E] animate-pulse" />
+      <span className="w-2 h-2 rounded-full bg-[#E84C1E]" />
       {defaultLabel}
     </Link>
   );
