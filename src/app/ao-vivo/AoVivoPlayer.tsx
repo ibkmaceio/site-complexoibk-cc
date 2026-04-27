@@ -58,6 +58,7 @@ export default function AoVivoPlayer() {
     : `https://www.youtube-nocookie.com/embed/${lastCompletedId}?rel=0`;
 
   return (
+    <>
     <section className="px-6 sm:px-10 lg:px-16 py-16 max-w-7xl mx-auto">
 
       {/* Header */}
@@ -162,5 +163,6 @@ export default function AoVivoPlayer() {
       </div>
     </section>
     <LiveDebugOverlay />
+    </>
   );
 }
