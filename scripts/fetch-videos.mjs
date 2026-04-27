@@ -51,7 +51,11 @@ function parseRSS(xml) {
 }
 
 async function fetchFeed(url) {
-  const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+  // YouTube retorna 404/vazio sem User-Agent em alguns ambientes (GitHub Actions inclusive).
+  const res = await fetch(url, {
+    signal: AbortSignal.timeout(8000),
+    headers: { "User-Agent": "Mozilla/5.0 (compatible; ibkmaceio-build/1.0)" },
+  });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return parseRSS(await res.text());
 }
