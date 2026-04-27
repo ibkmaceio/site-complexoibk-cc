@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { CHURCH_INFO, PROGRAMACAO } from "@/lib/data/mock";
 import videosData from "@/lib/data/videos.json";
 import { checkLive, getLastCompletedLive, isInPostLiveWindow } from "@/lib/utils/check-live";
+import LiveDebugOverlay from "@/components/ui/LiveDebugOverlay";
 
 const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
 const fallbackId = videosData.ibk[0].id;
@@ -160,5 +161,6 @@ export default function AoVivoPlayer() {
         </div>
       </div>
     </section>
+    <LiveDebugOverlay />
   );
 }
