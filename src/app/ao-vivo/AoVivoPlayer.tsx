@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CHURCH_INFO, PROGRAMACAO } from "@/lib/data/mock";
 import videosData from "@/lib/data/videos.json";
-import { checkLive, getLastCompletedLive } from "@/lib/utils/check-live";
+import { checkLive, getLastCompletedLive, isInPostLiveWindow } from "@/lib/utils/check-live";
 
 const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
 const fallbackId = videosData.ibk[0].id;
@@ -12,6 +12,7 @@ export default function AoVivoPlayer() {
   const [live, setLive] = useState(false);
   const [liveVideoId, setLiveVideoId] = useState<string | null>(null);
   const [lastCompletedId, setLastCompletedId] = useState<string>(fallbackId);
+  const lastCompletedIdRef = useRef(fallbackId);
 
   useEffect(() => {
     checkLive().then((result) => {
@@ -22,8 +23,31 @@ export default function AoVivoPlayer() {
     });
 
     getLastCompletedLive().then((id) => {
-      if (id) setLastCompletedId(id);
+      if (id) {
+        setLastCompletedId(id);
+        lastCompletedIdRef.current = id;
+      }
     });
+  }, []);
+
+  // Retry pós-live: enquanto dentro da janela de 15 min após encerrar a live,
+  // re-tenta a cada 60s até o YouTube processar e disponibilizar o vídeo gravado.
+  useEffect(() => {
+    if (!isInPostLiveWindow()) return;
+
+    const interval = setInterval(async () => {
+      if (!isInPostLiveWindow()) {
+        clearInterval(interval);
+        return;
+      }
+      const id = await getLastCompletedLive();
+      if (id && id !== lastCompletedIdRef.current) {
+        lastCompletedIdRef.current = id;
+        setLastCompletedId(id);
+      }
+    }, 60_000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const src = live
