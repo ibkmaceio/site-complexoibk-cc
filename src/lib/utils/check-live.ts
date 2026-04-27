@@ -135,22 +135,31 @@ export async function getLastCompletedLive(): Promise<string | null> {
 
   if (!API_KEY) return null;
 
-  // Durante retry pós-live: verificar se o vídeo da live já está disponível
-  // via videos.list (1 unidade) em vez de search (100 unidades).
+  // Durante retry pós-live: verificar se o vídeo da live já está pronto para
+  // tocar via videos.list (1 unidade) em vez de search (100 unidades).
+  // Só declara pronto quando processingStatus=succeeded, embeddable=true e public —
+  // o iframe falha em qualquer outro estado.
   if (postLive) {
     try {
       const savedId = localStorage.getItem(LIVE_VIDEO_ID_KEY);
       if (savedId) {
-        const url = `https://www.googleapis.com/youtube/v3/videos?part=id&id=${savedId}&key=${API_KEY}`;
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=status,processingDetails&id=${savedId}&key=${API_KEY}`;
         const res = await fetch(url);
         if (res.ok) {
           const data = await res.json();
-          if ((data.items ?? []).length > 0) {
+          const item = (data.items ?? [])[0] as
+            | { status?: { privacyStatus?: string; embeddable?: boolean }; processingDetails?: { processingStatus?: string } }
+            | undefined;
+          const ready =
+            item?.processingDetails?.processingStatus === "succeeded" &&
+            item?.status?.privacyStatus === "public" &&
+            item?.status?.embeddable === true;
+          if (ready) {
             writeCache(COMPLETED_CACHE_KEY, { videoId: savedId, ts: Date.now() });
             return savedId;
           }
         }
-        // Vídeo ainda não processado — próxima tentativa em 90s
+        // Ainda processando ou não public/embeddable — próxima tentativa
         return null;
       }
     } catch {}
