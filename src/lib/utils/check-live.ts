@@ -2,6 +2,9 @@
 // Compartilhado entre HeroSection (CTA destacado) e AoVivoPlayer (player principal).
 
 const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
+// Uploads playlist do canal — convenção do YouTube: troca UC por UU no ID.
+// Lives ativas, agendadas e gravadas aparecem aqui em ordem de upload.
+const UPLOADS_PLAYLIST_ID = "UU" + CHANNEL_ID.slice(2);
 const API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 const CACHE_KEY = "ibk_live_check_v1";
 // Cache adaptativo: 2 min dentro do horário de culto (±30 min), 30 min fora.
@@ -102,13 +105,36 @@ export async function checkLive(): Promise<LiveCheck> {
     return { isLive: false, videoId: null, ts: Date.now() };
   }
 
+  // 50× mais barato que search?eventType=live (100u):
+  //   1. playlistItems pega os 3 últimos vídeos do canal (1u)
+  //   2. videos.list checa liveStreamingDetails dos 3 em batch (1u)
+  // Live ativa = actualStartTime existe E actualEndTime não existe.
   try {
-    const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${CHANNEL_ID}&eventType=live&type=video&key=${API_KEY}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error();
-    const data = await res.json();
-    const items: Array<{ id?: { videoId?: string } }> = data.items || [];
-    const videoId = items[0]?.id?.videoId ?? null;
+    const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=${UPLOADS_PLAYLIST_ID}&maxResults=3&key=${API_KEY}`;
+    const playlistRes = await fetch(playlistUrl);
+    if (!playlistRes.ok) throw new Error();
+    const playlistData = await playlistRes.json();
+    const ids = (playlistData.items ?? [])
+      .map((it: { contentDetails?: { videoId?: string } }) => it.contentDetails?.videoId)
+      .filter((id: string | undefined): id is string => !!id);
+
+    if (ids.length === 0) {
+      const result: LiveCheck = { isLive: false, videoId: null, ts: Date.now() };
+      writeCache(CACHE_KEY, result);
+      trackLiveTransition(false);
+      return result;
+    }
+
+    const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${ids.join(",")}&key=${API_KEY}`;
+    const videosRes = await fetch(videosUrl);
+    if (!videosRes.ok) throw new Error();
+    const videosData = await videosRes.json();
+    const liveItem = (videosData.items ?? []).find(
+      (v: { id?: string; liveStreamingDetails?: { actualStartTime?: string; actualEndTime?: string } }) =>
+        v.liveStreamingDetails?.actualStartTime && !v.liveStreamingDetails?.actualEndTime,
+    ) as { id?: string } | undefined;
+
+    const videoId = liveItem?.id ?? null;
     const result: LiveCheck = { isLive: videoId !== null, videoId, ts: Date.now() };
     writeCache(CACHE_KEY, result);
     trackLiveTransition(result.isLive, videoId);
