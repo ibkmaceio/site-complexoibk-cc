@@ -7,10 +7,11 @@ const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
 const UPLOADS_PLAYLIST_ID = "UU" + CHANNEL_ID.slice(2);
 const API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
-// CDN GitHub raw — JSON atualizado a cada 5 min pelo workflow update-live-status.yml.
+// CDN jsDelivr — JSON atualizado a cada 5 min pelo workflow update-live-status.yml.
 // Permite que N visitantes consultem o estado sem cada um bater na YouTube API.
+// jsDelivr suporta purge via API após commit, garantindo dado fresco rapidamente.
 const CDN_LIVE_STATUS_URL =
-  "https://raw.githubusercontent.com/ibkmaceio/site-complexoibk-cc/live-status/live-status.json";
+  "https://cdn.jsdelivr.net/gh/ibkmaceio/site-complexoibk-cc@live-status/live-status.json";
 const CDN_MAX_AGE_MS = 10 * 60 * 1000; // só aceita CDN se ts < 10 min (cron 5 min + buffer)
 const CACHE_KEY = "ibk_live_check_v1";
 // Cache adaptativo: 2 min dentro do horário de culto (±30 min), 30 min fora.

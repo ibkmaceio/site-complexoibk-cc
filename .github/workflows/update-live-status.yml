@@ -38,14 +38,17 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node main-tree/scripts/update-live-status.mjs status-tree/live-status.json
 
-      - name: Commit and push
+      - name: Commit and force-push (squash)
         working-directory: status-tree
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add live-status.json
           git commit -m "chore: update live-status [skip ci]"
-          # Squash para manter a branch live-status com poucos commits
           git reset --soft $(git rev-list --max-parents=0 HEAD)
           git commit --amend --no-edit --reset-author
           git push --force origin live-status
+
+      - name: Purge jsDelivr CDN
+        run: |
+          curl -s -X GET "https://purge.jsdelivr.net/gh/ibkmaceio/site-complexoibk-cc@live-status/live-status.json" || true
