@@ -6,6 +6,12 @@ const CHANNEL_ID = "UCRdiHrr_rVcJoxfv62QAYTw";
 // Lives ativas, agendadas e gravadas aparecem aqui em ordem de upload.
 const UPLOADS_PLAYLIST_ID = "UU" + CHANNEL_ID.slice(2);
 const API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
+
+// CDN GitHub raw — JSON atualizado a cada 5 min pelo workflow update-live-status.yml.
+// Permite que N visitantes consultem o estado sem cada um bater na YouTube API.
+const CDN_LIVE_STATUS_URL =
+  "https://raw.githubusercontent.com/ibkmaceio/site-complexoibk-cc/live-status/live-status.json";
+const CDN_MAX_AGE_MS = 10 * 60 * 1000; // só aceita CDN se ts < 10 min (cron 5 min + buffer)
 const CACHE_KEY = "ibk_live_check_v1";
 // Cache adaptativo: 2 min dentro do horário de culto (±30 min), 30 min fora.
 // Reduz ~90% das chamadas à API search (100 unidades) — só consulta com frequência
@@ -94,12 +100,43 @@ function trackLiveTransition(isLive: boolean, videoId?: string | null) {
   } catch {}
 }
 
+// Tenta buscar o estado pelo CDN do GitHub (JSON atualizado a cada 5 min).
+// Custo: 0 unidades de YouTube API. Suporta tráfego ilimitado.
+async function fetchLiveStatusFromCDN(): Promise<LiveCheck | null> {
+  try {
+    // Cachebust por minuto para evitar cache HTTP do GitHub raw (~5 min)
+    const cachebust = Math.floor(Date.now() / 60_000);
+    const res = await fetch(`${CDN_LIVE_STATUS_URL}?t=${cachebust}`);
+    if (!res.ok) return null;
+    const data = (await res.json()) as { isLive?: boolean; videoId?: string | null; ts?: number };
+    if (typeof data.ts !== "number") return null;
+    // Rejeita dados velhos (workflow pode ter falhado ou estar atrasado)
+    if (Date.now() - data.ts > CDN_MAX_AGE_MS) return null;
+    return {
+      isLive: !!data.isLive,
+      videoId: data.videoId ?? null,
+      ts: data.ts,
+    };
+  } catch {
+    return null;
+  }
+}
+
 export async function checkLive(): Promise<LiveCheck> {
   // TTL adaptativo: cache curto em horário de culto, longo fora dele
   const ttl = estaEmHorarioDeCulto(SERVICE_BUFFER_HOURS) ? CACHE_TTL_ACTIVE_MS : CACHE_TTL_IDLE_MS;
   const cached = readCache<LiveCheck>(CACHE_KEY, ttl);
   if (cached) return cached;
 
+  // Caminho primário: CDN GitHub (zero unidades de quota, escala ilimitada)
+  const cdn = await fetchLiveStatusFromCDN();
+  if (cdn) {
+    writeCache(CACHE_KEY, cdn);
+    trackLiveTransition(cdn.isLive, cdn.videoId);
+    return cdn;
+  }
+
+  // Fallback: chamada direta à API (custo: 2 unidades) se CDN falhar/atrasar
   if (!API_KEY) {
     trackLiveTransition(false);
     return { isLive: false, videoId: null, ts: Date.now() };
