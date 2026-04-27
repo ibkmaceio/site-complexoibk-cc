@@ -110,7 +110,8 @@ export async function checkLive(): Promise<LiveCheck> {
   //   2. videos.list checa liveStreamingDetails dos 3 em batch (1u)
   // Live ativa = actualStartTime existe E actualEndTime não existe.
   try {
-    const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=${UPLOADS_PLAYLIST_ID}&maxResults=3&key=${API_KEY}`;
+    // maxResults=5: safety contra uploads regulares antes da live (custo igual a 1)
+    const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=${UPLOADS_PLAYLIST_ID}&maxResults=5&key=${API_KEY}`;
     const playlistRes = await fetch(playlistUrl);
     if (!playlistRes.ok) throw new Error();
     const playlistData = await playlistRes.json();
