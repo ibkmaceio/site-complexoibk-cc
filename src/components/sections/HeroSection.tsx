@@ -6,7 +6,10 @@ import { CHURCH_INFO } from "@/lib/data/mock";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-ibk-dark-deep">
+    <section
+      className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-ibk-dark-deep"
+      style={{ minHeight: "100svh" }}
+    >
 
       {/* Vídeo de fundo — carregado de forma diferida (não bloqueia LCP) */}
       <HeroVideo />
@@ -16,11 +19,11 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
 
       {/* Conteúdo — renderizado pelo servidor, sem esperar JS */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-16 pt-24 sm:pb-20 sm:pt-28 lg:pb-20 lg:pt-32">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-16 pt-20 sm:pb-20 sm:pt-28 lg:pb-20 lg:pt-32">
         <div className="max-w-3xl">
 
           {/* Eyebrow */}
-          <div className="flex items-center gap-3 mb-8 animate-hero-fade" style={{ animationDelay: "0.1s" }}>
+          <div className="flex items-center gap-3 mb-5 sm:mb-8 animate-hero-fade" style={{ animationDelay: "0.1s" }}>
             <span className="w-6 h-px bg-[#E84C1E]" />
             <span className="text-white/65 text-xs font-body uppercase tracking-[0.2em]">
               {COPY.hero.eyebrow}
@@ -28,7 +31,7 @@ export default function HeroSection() {
           </div>
 
           {/* Headline — LCP element: sem delay, sem hidden, renderiza imediatamente */}
-          <h1 className="font-display font-black text-[clamp(3.5rem,9vw,7.5rem)] text-white leading-[0.9] tracking-tight mb-8">
+          <h1 className="font-display font-black text-[clamp(2.2rem,8vw,7.5rem)] text-white leading-[0.9] tracking-tight mb-5 sm:mb-8">
             Você foi feito
             <br />
             para{" "}
@@ -37,7 +40,7 @@ export default function HeroSection() {
 
           {/* Subline */}
           <p
-            className="text-white/60 font-body text-lg max-w-xl leading-relaxed mb-12 animate-hero-fade"
+            className="text-white/60 font-body text-base sm:text-lg max-w-xl leading-relaxed mb-8 sm:mb-12 animate-hero-fade"
             style={{ animationDelay: "0.5s" }}
           >
             {COPY.hero.subline}
