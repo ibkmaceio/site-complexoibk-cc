@@ -18,7 +18,7 @@ export default function SobreSection({ asH1 = false }: SobreSectionProps) {
         <div>
           <FadeIn>
             <div className="flex items-center gap-3 mb-8">
-              <span className="w-6 h-px bg-[#E84C1E]" />
+              <span className="w-6 h-px bg-[#D4521A]" />
               <span className="text-white/65 text-xs font-body uppercase tracking-[0.2em]">
                 {COPY.sobre.eyebrow}
               </span>
@@ -46,7 +46,7 @@ export default function SobreSection({ asH1 = false }: SobreSectionProps) {
           <FadeIn delay={0.3}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
               {[COPY.sobre.missao, COPY.sobre.visao].map((item) => (
-                <div key={item.titulo} className="border-l border-[#E84C1E]/40 pl-4">
+                <div key={item.titulo} className="border-l border-[#D4521A]/40 pl-4">
                   <h4 className="font-display font-extrabold text-white text-sm uppercase tracking-widest mb-2">
                     {item.titulo}
                   </h4>
@@ -61,7 +61,7 @@ export default function SobreSection({ asH1 = false }: SobreSectionProps) {
           <FadeIn delay={0.4}>
             <Link
               href="/nossa-historia"
-              className="inline-flex items-center gap-2 text-white font-display font-bold text-sm hover:text-[#E84C1E] active:text-[#E84C1E] transition-colors group"
+              className="inline-flex items-center gap-2 text-white font-display font-bold text-sm hover:text-[#D4521A] active:text-[#D4521A] transition-colors group"
             >
               {COPY.sobre.cta}
               <ArrowRight size={16} className="group-hover:translate-x-1 group-active:translate-x-1 transition-transform" />
@@ -89,15 +89,14 @@ export default function SobreSection({ asH1 = false }: SobreSectionProps) {
           </FadeIn>
 
           <FadeIn delay={0.15} direction="left">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {COPY.sobre.valores.map((v) => (
                 <div
                   key={v.titulo}
-                  className="bg-ibk-dark-card border border-white/12 rounded p-4 hover:border-[#E84C1E]/40 active:border-[#E84C1E]/40 transition-colors"
+                  className="bg-ibk-dark-card border border-white/12 rounded p-4 hover:border-[#D4521A]/40 active:border-[#D4521A]/40 transition-colors text-center"
                 >
-                  <span className="text-[#E84C1E] text-lg block mb-2">{v.icone}</span>
-                  <h5 className="font-display font-extrabold text-white text-sm mb-1">{v.titulo}</h5>
-                  <p className="text-white/65 font-body text-xs leading-relaxed">{v.texto}</p>
+                  <span className="text-2xl block mb-2">{v.icone}</span>
+                  <h5 className="font-display font-extrabold text-white text-sm">{v.titulo}</h5>
                 </div>
               ))}
             </div>

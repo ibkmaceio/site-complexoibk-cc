@@ -4,7 +4,7 @@ import { CHURCH_INFO } from "@/lib/data/mock";
 export default function EmBreve({ titulo }: { titulo: string }) {
   return (
     <section className="py-40 px-6 text-center">
-      <span className="w-6 h-px bg-[#E84C1E] inline-block mb-8" />
+      <span className="w-6 h-px bg-[#D4521A] inline-block mb-8" />
       <h1 className="font-display font-black text-[clamp(2.5rem,5vw,4rem)] text-white leading-tight mb-4">
         {titulo}
       </h1>
@@ -19,7 +19,7 @@ export default function EmBreve({ titulo }: { titulo: string }) {
           href={CHURCH_INFO.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-[#E84C1E] text-white text-sm font-display font-bold rounded transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-[#D4521A] text-white text-sm font-display font-bold rounded transition-colors"
           aria-label="Instagram IBK Maceió"
         >
           Instagram
@@ -28,7 +28,7 @@ export default function EmBreve({ titulo }: { titulo: string }) {
           href={CHURCH_INFO.youtube}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-[#E84C1E] text-white text-sm font-display font-bold rounded transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-[#D4521A] text-white text-sm font-display font-bold rounded transition-colors"
           aria-label="YouTube IBK Maceió"
         >
           YouTube

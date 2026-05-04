@@ -65,7 +65,7 @@ export default function AoVivoPlayer() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <div className="flex items-center gap-3 mb-3">
-            <span className="w-6 h-px bg-[#E84C1E]" />
+            <span className="w-6 h-px bg-[#D4521A]" />
             <span className="text-white/50 text-xs font-body uppercase tracking-[0.2em]">
               Transmissão
             </span>
@@ -81,7 +81,7 @@ export default function AoVivoPlayer() {
             onClick={() => setLive(true)}
             className={`flex items-center gap-2 px-4 py-2.5 rounded text-sm font-display font-700 transition-all ${
               live
-                ? "bg-[#E84C1E] text-white"
+                ? "bg-[#D4521A] text-white"
                 : "bg-white/8 text-white/50 hover:text-white hover:bg-white/12"
             }`}
           >
@@ -118,7 +118,7 @@ export default function AoVivoPlayer() {
         {live ? (
           <p className="text-white/30 font-body text-xs">
             Sem transmissão ativa?{" "}
-            <button onClick={() => setLive(false)} className="text-[#E84C1E] hover:underline">
+            <button onClick={() => setLive(false)} className="text-[#D4521A] hover:underline">
               Ver último culto
             </button>
           </p>

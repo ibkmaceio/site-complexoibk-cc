@@ -15,7 +15,7 @@ export default function DoacoesSection() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ibk-dark-deep/95 via-ibk-dark-deep/70 to-ibk-dark-deep/95" />
       {/* Acento laranja sutil no fundo */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E84C1E]/40 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4521A]/40 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
 
@@ -25,7 +25,7 @@ export default function DoacoesSection() {
             <p className="font-serif italic text-white/40 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-3">
               &ldquo;{COPY.dizimos.versiculoTexto}&rdquo;
             </p>
-            <span className="text-[#E84C1E] font-display font-bold text-sm">{COPY.dizimos.versiculoRef}</span>
+            <span className="text-[#D4521A] font-display font-bold text-sm">{COPY.dizimos.versiculoRef}</span>
           </div>
         </FadeIn>
 
@@ -35,7 +35,7 @@ export default function DoacoesSection() {
           <div>
             <FadeIn>
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-6 h-px bg-[#E84C1E]" />
+                <span className="w-6 h-px bg-[#D4521A]" />
                 <span className="text-white/65 text-xs font-body uppercase tracking-[0.2em]">
                   {COPY.dizimos.eyebrow}
                 </span>
@@ -51,8 +51,8 @@ export default function DoacoesSection() {
             {/* PIX */}
             <FadeIn delay={0.1}>
               <div className="flex items-center gap-4 p-5 border border-white/10 rounded bg-white/3 mb-6">
-                <div className="w-10 h-10 flex items-center justify-center rounded bg-[#E84C1E]/15 shrink-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E84C1E" strokeWidth="1.5">
+                <div className="w-10 h-10 flex items-center justify-center rounded bg-[#D4521A]/15 shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4521A" strokeWidth="1.5">
                     <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
                     <rect x="3" y="14" width="7" height="7"/><rect x="17" y="17" width="4" height="4"/>
                   </svg>
@@ -69,7 +69,7 @@ export default function DoacoesSection() {
             <FadeIn delay={0.2}>
               <Link
                 href="/doacoes"
-                className="inline-flex items-center gap-2 text-white font-display font-bold text-sm hover:text-[#E84C1E] active:text-[#E84C1E] transition-colors group"
+                className="inline-flex items-center gap-2 text-white font-display font-bold text-sm hover:text-[#D4521A] active:text-[#D4521A] transition-colors group"
               >
                 {COPY.dizimos.ctaDetalhes}
                 <ArrowRight size={15} className="group-hover:translate-x-1 group-active:translate-x-1 transition-transform" />
@@ -81,7 +81,7 @@ export default function DoacoesSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {DOACOES.bancos.map((banco, i) => (
               <FadeIn key={banco.banco} delay={i * 0.07} direction="left">
-                <div className="p-5 border border-white/10 rounded bg-ibk-dark-card hover:border-[#E84C1E]/30 active:border-[#E84C1E]/30 transition-colors">
+                <div className="p-5 border border-white/10 rounded bg-ibk-dark-card hover:border-[#D4521A]/30 active:border-[#D4521A]/30 transition-colors">
                   <span className="font-display font-extrabold text-[10px] uppercase tracking-widest text-white/40 block mb-3">
                     {banco.banco}
                   </span>

@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import TemaMesSection from "@/components/sections/TemaMesSection";
+import MissaoSection from "@/components/sections/MissaoSection";
 import ProgramacaoSection from "@/components/sections/ProgramacaoSection";
 import NoticiasSection from "@/components/sections/NoticiasSection";
 import VideosSection from "@/components/sections/VideosSection";
@@ -72,6 +73,7 @@ export default function HomePage() {
       <main id="main-content">
         <HeroSection />
         <TemaMesSection />
+        <MissaoSection />
         <ProgramacaoSection />
         <NoticiasSection />
         <VideosSection />

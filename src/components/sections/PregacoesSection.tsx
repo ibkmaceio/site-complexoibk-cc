@@ -24,7 +24,7 @@ export default function PregacoesSection() {
           <FadeIn>
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <span className="w-6 h-px bg-[#E84C1E]" />
+                <span className="w-6 h-px bg-[#D4521A]" />
                 <span className="text-white/65 text-xs font-body uppercase tracking-[0.2em]">
                   {COPY.pregacoes.eyebrow}
                 </span>
@@ -71,7 +71,7 @@ export default function PregacoesSection() {
                   />
                   <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 group-active:bg-black/0 transition-colors" />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-9 h-9 flex items-center justify-center rounded-full bg-[#E84C1E]/90 group-hover:bg-[#E84C1E] group-hover:scale-110 group-active:bg-[#E84C1E] group-active:scale-110 transition-all">
+                    <div className="w-9 h-9 flex items-center justify-center rounded-full bg-[#D4521A]/90 group-hover:bg-[#D4521A] group-hover:scale-110 group-active:bg-[#D4521A] group-active:scale-110 transition-all">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="white" className="ml-0.5">
                         <polygon points="5 3 19 12 5 21 5 3" />
                       </svg>

@@ -9,8 +9,8 @@
   --color-ibk-dark-card:    #2d2d2d;  /* cards, thumbnails           */
 
   /* Acento */
-  --color-ibk-accent:       #E84C1E;
-  --color-ibk-accent-dark:  #C43A12;
+  --color-ibk-accent:       #D4521A;
+  --color-ibk-accent-dark:  #B34215;
   --color-ibk-accent-light: #FFF0EC;
 
   /* Superfície clara */
@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.25rem;
   padding: 0.25rem 0.75rem;
-  background-color: #E84C1E;
+  background-color: #D4521A;
   color: #0d0d0d;
   font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: 0.6875rem;
@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   width: 3rem;
   height: 3px;
-  background-color: #E84C1E;
+  background-color: #D4521A;
   margin-bottom: 1rem;
 }
 
@@ -131,6 +131,6 @@ h1, h2, h3, h4, h5, h6 {
   background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E84C1E;
+  background: #D4521A;
   border-radius: 3px;
 }

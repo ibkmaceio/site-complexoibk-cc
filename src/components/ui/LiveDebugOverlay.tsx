@@ -68,7 +68,7 @@ export default function LiveDebugOverlay() {
     <div className="fixed bottom-4 right-4 z-[9999] w-72 bg-black/90 border border-white/10 rounded-lg p-4 text-xs font-body shadow-2xl">
       <div className="flex items-center justify-between mb-3">
         <span className="text-white/40 uppercase tracking-widest text-[10px]">Live Debug</span>
-        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${state.isLive ? "bg-[#E84C1E] text-white" : "bg-white/10 text-white/50"}`}>
+        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${state.isLive ? "bg-[#D4521A] text-white" : "bg-white/10 text-white/50"}`}>
           {state.isLive ? "● AO VIVO" : "○ offline"}
         </span>
       </div>
@@ -76,10 +76,10 @@ export default function LiveDebugOverlay() {
       <div className="space-y-1.5">
         {row("wasLive flag", state.wasLive ? "✓ sim" : "✗ não")}
         {row("liveVideoId", state.liveVideoId
-          ? <a href={`https://youtu.be/${state.liveVideoId}`} target="_blank" rel="noreferrer" className="text-[#E84C1E] underline">{state.liveVideoId}</a>
+          ? <a href={`https://youtu.be/${state.liveVideoId}`} target="_blank" rel="noreferrer" className="text-[#D4521A] underline">{state.liveVideoId}</a>
           : "—")}
         {row("lastCompleted", state.lastCompletedId
-          ? <a href={`https://youtu.be/${state.lastCompletedId}`} target="_blank" rel="noreferrer" className="text-[#E84C1E] underline">{state.lastCompletedId}</a>
+          ? <a href={`https://youtu.be/${state.lastCompletedId}`} target="_blank" rel="noreferrer" className="text-[#D4521A] underline">{state.lastCompletedId}</a>
           : "—")}
       </div>
 
@@ -125,7 +125,7 @@ export default function LiveDebugOverlay() {
             localStorage.setItem("ibk_post_live_until_v1", until);
             setState(readState());
           }}
-          className="flex-1 px-2 py-1.5 bg-[#E84C1E]/20 hover:bg-[#E84C1E]/40 rounded text-[#E84C1E] hover:text-white transition-all text-[10px]"
+          className="flex-1 px-2 py-1.5 bg-[#D4521A]/20 hover:bg-[#D4521A]/40 rounded text-[#D4521A] hover:text-white transition-all text-[10px]"
         >
           Simular fim
         </button>

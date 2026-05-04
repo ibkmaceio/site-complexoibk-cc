@@ -81,7 +81,7 @@ export default function VideosSection() {
             <FadeIn>
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="w-6 h-px bg-[#E84C1E]" />
+                  <span className="w-6 h-px bg-[#D4521A]" />
                   <span className="text-white/65 text-xs font-body uppercase tracking-[0.2em]">
                     {COPY.tvIbk.eyebrow}
                   </span>
@@ -123,7 +123,7 @@ export default function VideosSection() {
                   <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 group-active:bg-black/0 transition-colors" />
                   {/* Play button */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-18 h-18 flex items-center justify-center rounded-full border-2 border-white/80 bg-black/25 backdrop-blur-sm transition-all group-hover:bg-[#E84C1E] group-hover:border-[#E84C1E] group-hover:scale-110 group-active:bg-[#E84C1E] group-active:border-[#E84C1E] group-active:scale-110">
+                    <div className="w-18 h-18 flex items-center justify-center rounded-full border-2 border-white/80 bg-black/25 backdrop-blur-sm transition-all group-hover:bg-[#D4521A] group-hover:border-[#D4521A] group-hover:scale-110 group-active:bg-[#D4521A] group-active:border-[#D4521A] group-active:scale-110">
                       <svg width="28" height="28" viewBox="0 0 24 24" fill="white" className="ml-1">
                         <polygon points="5 3 19 12 5 21 5 3" />
                       </svg>
@@ -131,7 +131,7 @@ export default function VideosSection() {
                   </div>
                 </div>
                 <div className="mt-4 px-1">
-                  <h3 className="font-display font-extrabold text-lg text-white leading-snug group-hover:text-[#E84C1E] group-active:text-[#E84C1E] transition-colors">
+                  <h3 className="font-display font-extrabold text-lg text-white leading-snug group-hover:text-[#D4521A] group-active:text-[#D4521A] transition-colors">
                     {principal.titulo}
                   </h3>
                   <p className="text-white/65 font-body text-xs mt-1">
@@ -158,7 +158,7 @@ export default function VideosSection() {
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-active:scale-110"
                       />
                       <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 group-active:bg-black/0 transition-colors">
-                        <div className="w-7 h-7 flex items-center justify-center rounded-full bg-[#E84C1E]/90">
+                        <div className="w-7 h-7 flex items-center justify-center rounded-full bg-[#D4521A]/90">
                           <svg width="10" height="10" viewBox="0 0 24 24" fill="white" className="ml-0.5">
                             <polygon points="5 3 19 12 5 21 5 3" />
                           </svg>
@@ -199,7 +199,7 @@ export default function VideosSection() {
             <div className="relative w-full aspect-video">
               <button
                 type="button"
-                className="absolute top-2 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 text-white/80 hover:text-white hover:bg-[#E84C1E] active:bg-[#E84C1E] transition-colors"
+                className="absolute top-2 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 text-white/80 hover:text-white hover:bg-[#D4521A] active:bg-[#D4521A] transition-colors"
                 onClick={() => setOpenVideo(null)}
                 aria-label="Fechar"
               >

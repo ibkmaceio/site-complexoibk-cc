@@ -18,7 +18,7 @@ export default function ScrollProgress() {
   return (
     <div
       ref={barRef}
-      className="fixed top-0 left-0 right-0 h-[2px] bg-[#E84C1E] origin-left z-[60]"
+      className="fixed top-0 left-0 right-0 h-[2px] bg-[#D4521A] origin-left z-[60]"
       style={{ transform: "scaleX(0)" }}
     />
   );
