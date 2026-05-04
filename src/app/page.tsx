@@ -72,8 +72,8 @@ export default function HomePage() {
       <Header />
       <main id="main-content">
         <HeroSection />
-        <MissaoSection />
         <TemaMesSection />
+        <MissaoSection />
         <ProgramacaoSection />
         <NoticiasSection />
         <VideosSection />
