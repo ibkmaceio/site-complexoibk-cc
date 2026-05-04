@@ -23,6 +23,12 @@ export const COPY = {
     linha2: "você.",
     versiculo: "Porque Deus tanto amou o mundo que deu o seu Filho unigênito, para que todo o que nele crer não pereça, mas tenha a vida eterna.",
     referencia: "João 3:16",
+    pilares: [
+      { titulo: "Palavra",    texto: "A Bíblia como fundamento de tudo que somos e fazemos." },
+      { titulo: "Comunhão",   texto: "Relacionamentos genuínos que edificam e sustentam." },
+      { titulo: "Missão",     texto: "Cada membro, um missionário em seu cotidiano." },
+      { titulo: "Excelência", texto: "Fazer com todo o cuidado o que é feito para Deus." },
+    ],
   },
 
   // ── SOBRE A CHURCH ────────────────────────────────────
@@ -42,12 +48,12 @@ export const COPY = {
       texto: "Inspirar pessoas a amar a Deus acima de tudo e de todos, a fim de conhecer e praticar a palavra vivendo uma vida na inclinação do Espírito Santo.",
     },
     valores: [
-      { icone: "❤️", titulo: "Amor" },
-      { icone: "👨‍👩‍👧", titulo: "Família" },
-      { icone: "✨", titulo: "Vida autêntica" },
-      { icone: "🤝", titulo: "Comunhão" },
-      { icone: "🙏", titulo: "Respeito" },
-      { icone: "🫶", titulo: "Serviço" },
+      { titulo: "Amor",           texto: "Amar a Deus acima de tudo e ao próximo como a si mesmo." },
+      { titulo: "Família",        texto: "Uma comunidade que cuida, acolhe e cresce unida." },
+      { titulo: "Vida autêntica", texto: "Viver com integridade e transparência diante de Deus e das pessoas." },
+      { titulo: "Comunhão",       texto: "Relacionamentos genuínos que edificam e sustentam a fé." },
+      { titulo: "Respeito",       texto: "Honrar cada pessoa como criação única e amada por Deus." },
+      { titulo: "Serviço",        texto: "Usar os dons para servir a Deus, à Igreja e à cidade." },
     ],
     cta: "Conheça nossa história",
   },

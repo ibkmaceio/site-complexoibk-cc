@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Heart, Users, Sparkles, Users2, Shield, Gift } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
 import { COPY } from "@/lib/data/copy";
+
+const VALOR_ICONS = [Heart, Users, Sparkles, Users2, Shield, Gift];
 
 interface SobreSectionProps {
   asH1?: boolean;
@@ -90,15 +92,21 @@ export default function SobreSection({ asH1 = false }: SobreSectionProps) {
 
           <FadeIn delay={0.15} direction="left">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {COPY.sobre.valores.map((v) => (
-                <div
-                  key={v.titulo}
-                  className="bg-ibk-dark-card border border-white/12 rounded p-4 hover:border-[#D4521A]/40 active:border-[#D4521A]/40 transition-colors text-center"
-                >
-                  <span className="text-2xl block mb-2">{v.icone}</span>
-                  <h5 className="font-display font-extrabold text-white text-sm">{v.titulo}</h5>
-                </div>
-              ))}
+              {COPY.sobre.valores.map((v, i) => {
+                const Icon = VALOR_ICONS[i];
+                return (
+                  <div
+                    key={v.titulo}
+                    className="bg-ibk-dark-card border border-white/12 rounded p-4 hover:border-[#D4521A]/40 active:border-[#D4521A]/40 transition-colors"
+                  >
+                    <div className="w-8 h-8 flex items-center justify-center rounded bg-[#D4521A]/15 mb-3">
+                      <Icon size={16} stroke="#D4521A" strokeWidth={1.5} />
+                    </div>
+                    <h5 className="font-display font-extrabold text-white text-xs uppercase tracking-widest mb-1">{v.titulo}</h5>
+                    <p className="text-white/55 font-body text-xs leading-relaxed">{v.texto}</p>
+                  </div>
+                );
+              })}
             </div>
           </FadeIn>
         </div>
