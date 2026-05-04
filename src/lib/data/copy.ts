@@ -18,7 +18,7 @@ export const COPY = {
 
   // ── TEMA DO MÊS ───────────────────────────────────────
   tema: {
-    eyebrow: "Tema de Abril",
+    eyebrow: "Nossa Mensagem",
     linha1: "Foi por",
     linha2: "você.",
     versiculo: "Porque Deus tanto amou o mundo que deu o seu Filho unigênito, para que todo o que nele crer não pereça, mas tenha a vida eterna.",
