@@ -21,7 +21,7 @@ export default function HeroLiveCta({ defaultLabel }: Props) {
     return (
       <Link
         href="/ao-vivo"
-        className="group relative flex items-center gap-3 px-8 py-4 bg-[#E84C1E] hover:bg-[#C43A12] active:bg-[#C43A12] text-white font-display font-extrabold text-sm tracking-wide rounded transition-all shadow-lg shadow-[#E84C1E]/40 hover:shadow-[#E84C1E]/60 hover:scale-[1.02]"
+        className="group relative flex items-center gap-3 px-8 py-4 bg-[#D4521A] hover:bg-[#B34215] active:bg-[#B34215] text-white font-display font-extrabold text-sm tracking-wide rounded transition-all shadow-lg shadow-[#D4521A]/40 hover:shadow-[#D4521A]/60 hover:scale-[1.02] active:scale-[0.97]"
         aria-label="Estamos transmitindo ao vivo agora — assistir"
       >
         <span className="relative flex w-2.5 h-2.5">
@@ -36,9 +36,9 @@ export default function HeroLiveCta({ defaultLabel }: Props) {
   return (
     <Link
       href="/ao-vivo"
-      className="flex items-center gap-3 px-8 py-4 border border-white/25 text-white font-display font-bold text-sm tracking-wide rounded hover:border-[#E84C1E] active:border-[#E84C1E] hover:text-white transition-all"
+      className="flex items-center gap-3 px-8 py-4 border border-white/25 text-white font-display font-bold text-sm tracking-wide rounded hover:border-[#D4521A] active:border-[#D4521A] hover:text-white transition-all"
     >
-      <span className="w-2 h-2 rounded-full bg-[#E84C1E]" />
+      <span className="w-2 h-2 rounded-full bg-[#D4521A]" />
       {defaultLabel}
     </Link>
   );

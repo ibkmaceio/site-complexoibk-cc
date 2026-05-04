@@ -58,7 +58,7 @@ export default function TemaMesSection() {
               const Icon = PILAR_ICONS[i];
               return (
                 <FadeIn key={p.titulo} delay={0.1 + i * 0.07} direction="left">
-                  <div className="group relative overflow-hidden border border-white/10 rounded p-5 bg-ibk-dark-card hover:border-[#D4521A]/50 active:border-[#D4521A]/50 hover:bg-[#261510] active:bg-[#261510] hover:-translate-y-1 hover:scale-[1.03] active:scale-[0.97] transition-all duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+                  <div className="group relative overflow-hidden border border-white/10 rounded p-5 bg-ibk-dark-card hover:border-[#D4521A]/50 active:border-[#D4521A]/50 hover:bg-[#261510] active:bg-[#261510] hover:-translate-y-1 active:-translate-y-1 hover:scale-[1.03] active:scale-[0.97] transition-all duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
                     <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-[#D4521A] to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity" />
                     <div className="w-9 h-9 flex items-center justify-center rounded bg-[#D4521A]/15 mb-3">
                       <Icon size={18} stroke="#D4521A" strokeWidth={1.5} />

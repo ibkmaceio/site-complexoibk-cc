@@ -199,7 +199,7 @@ export default function VideosSection() {
             <div className="relative w-full aspect-video">
               <button
                 type="button"
-                className="absolute top-2 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 text-white/80 hover:text-white hover:bg-[#D4521A] active:bg-[#D4521A] transition-colors"
+                className="absolute top-2 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 text-white/80 hover:text-white active:text-white hover:bg-[#D4521A] active:bg-[#D4521A] transition-colors"
                 onClick={() => setOpenVideo(null)}
                 aria-label="Fechar"
               >
