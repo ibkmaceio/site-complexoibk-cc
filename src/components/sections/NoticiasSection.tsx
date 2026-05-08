@@ -19,7 +19,7 @@ export default function NoticiasSection() {
           <FadeIn>
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <span className="w-6 h-px bg-[#E84C1E]" />
+                <span className="w-6 h-px bg-[#D4521A]" />
                 <span className="text-white/65 text-xs font-body uppercase tracking-[0.2em]">
                   {COPY.novidades.eyebrow}
                 </span>
@@ -67,7 +67,7 @@ export default function NoticiasSection() {
           <div className="lg:col-span-5 flex flex-col gap-4">
             {resto.slice(0, 3).map((n, i) => (
               <FadeIn key={n.slug} delay={i * 0.08} direction="left">
-                <Link href={`/novidades/${n.slug}`} className="group flex gap-4 p-4 rounded border border-white/10 bg-ibk-dark-card hover:border-[#E84C1E]/40 active:border-[#E84C1E]/40 hover:bg-[#2e1a0e] active:bg-[#2e1a0e] transition-all">
+                <Link href={`/novidades/${n.slug}`} className="group flex gap-4 p-4 rounded border border-white/10 bg-ibk-dark-card hover:border-[#D4521A]/40 active:border-[#D4521A]/40 hover:bg-[#2e1a0e] active:bg-[#2e1a0e] transition-all">
                   <div
                     role="img"
                     aria-label={n.titulo}

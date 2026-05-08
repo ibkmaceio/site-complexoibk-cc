@@ -36,10 +36,11 @@ const LAST_LIVE_FLAG = "ibk_was_live_v1";
 
 type Janela = { dia: number; inicio: number; fim: number };
 const JANELAS_LIVE: Janela[] = [
-  { dia: 0, inicio: 8.5, fim: 11 },
-  { dia: 0, inicio: 18, fim: 20.5 },
-  { dia: 3, inicio: 19, fim: 21.5 },
-  { dia: 6, inicio: 17.5, fim: 20 },
+  { dia: 0, inicio: 8.5, fim: 12.5 },  // Dom manhã: EBD 9h + Doutrinário 10h15
+  { dia: 0, inicio: 17.5, fim: 20 },   // Dom tarde: Família 18h
+  { dia: 2, inicio: 18.5, fim: 21 },    // Ter: Oração 19h
+  { dia: 3, inicio: 19, fim: 21.5 },   // Qua: Palavra 19h30
+  { dia: 6, inicio: 17.5, fim: 20 },   // Sáb: Jovens 18h
 ];
 
 export function estaEmHorarioDeCulto(bufferHoras = 0): boolean {

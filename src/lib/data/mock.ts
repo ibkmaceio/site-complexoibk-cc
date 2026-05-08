@@ -24,13 +24,18 @@ export const PROGRAMACAO = [
   {
     dia: "Domingo",
     cultos: [
-      { horario: "9h00", nome: "Culto da Manhã" },
-      { horario: "18h30", nome: "Culto da Noite" },
+      { horario: "9h00", nome: "EBD" },
+      { horario: "10h15", nome: "Culto Doutrinário" },
+      { horario: "18h00", nome: "Culto da Família" },
     ],
   },
   {
+    dia: "Terça-feira",
+    cultos: [{ horario: "19h00", nome: "Culto de Oração" }],
+  },
+  {
     dia: "Quarta-feira",
-    cultos: [{ horario: "19h30", nome: "Culto de Oração" }],
+    cultos: [{ horario: "19h30", nome: "Culto da Palavra" }],
   },
   {
     dia: "Sábado",

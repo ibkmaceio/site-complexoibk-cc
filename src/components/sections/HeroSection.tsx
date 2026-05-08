@@ -24,7 +24,7 @@ export default function HeroSection() {
 
           {/* Eyebrow */}
           <div className="flex items-center gap-3 mb-5 sm:mb-8 animate-hero-fade" style={{ animationDelay: "0.1s" }}>
-            <span className="w-6 h-px bg-[#E84C1E]" />
+            <span className="w-6 h-px bg-[#D4521A]" />
             <span className="text-white/65 text-xs font-body uppercase tracking-[0.2em]">
               {COPY.hero.eyebrow}
             </span>
@@ -71,7 +71,7 @@ export default function HeroSection() {
           href={CHURCH_INFO.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white/40 hover:text-[#E84C1E] active:text-[#E84C1E] transition-colors"
+          className="text-white/40 hover:text-[#D4521A] active:text-[#D4521A] transition-colors"
           aria-label="Instagram"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -84,7 +84,7 @@ export default function HeroSection() {
           href={CHURCH_INFO.youtube}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white/40 hover:text-[#E84C1E] active:text-[#E84C1E] transition-colors"
+          className="text-white/40 hover:text-[#D4521A] active:text-[#D4521A] transition-colors"
           aria-label="YouTube"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

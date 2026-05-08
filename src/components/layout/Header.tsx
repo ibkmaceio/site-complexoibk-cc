@@ -98,7 +98,7 @@ export default function Header() {
                         <Link
                           key={sub.href}
                           href={sub.href}
-                          className="block px-4 py-2.5 text-sm text-white/80 hover:text-white hover:bg-[#E84C1E]/10 transition-colors"
+                          className="block px-4 py-2.5 text-sm text-white/80 hover:text-white hover:bg-[#D4521A]/10 transition-colors"
                         >
                           {sub.label}
                         </Link>
@@ -113,7 +113,7 @@ export default function Header() {
             <div className="hidden lg:flex items-center gap-3">
               <Link
                 href="/ao-vivo"
-                className="flex items-center gap-1.5 px-4 py-2 bg-[#E84C1E] hover:bg-[#C43A12] text-white text-sm font-display font-bold rounded transition-colors"
+                className="flex items-center gap-1.5 px-4 py-2 bg-[#D4521A] hover:bg-[#B34215] text-white text-sm font-display font-bold rounded transition-colors"
               >
                 <Radio size={14} />
                 Ao Vivo
@@ -195,7 +195,7 @@ export default function Header() {
               <div className="flex gap-3 pt-4">
                 <Link
                   href="/ao-vivo"
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-[#E84C1E] text-white text-sm font-display font-bold rounded transition-colors hover:bg-[#C43A12]"
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-[#D4521A] text-white text-sm font-display font-bold rounded transition-colors hover:bg-[#B34215]"
                   onClick={() => setMobileOpen(false)}
                 >
                   <Radio size={14} />

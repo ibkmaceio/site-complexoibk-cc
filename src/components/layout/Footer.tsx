@@ -41,7 +41,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#1A1A1A] text-white">
       {/* Linha de acento laranja */}
-      <div className="h-1 bg-[#E84C1E]" />
+      <div className="h-1 bg-[#D4521A]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
@@ -61,7 +61,7 @@ export default function Footer() {
             </p>
 
             <div className="flex items-center gap-2 mt-4 text-white/65 text-sm font-body">
-              <MapPin size={14} className="text-[#E84C1E] shrink-0" />
+              <MapPin size={14} className="text-[#D4521A] shrink-0" />
               <span>Maceió, Alagoas — Brasil</span>
             </div>
 
@@ -70,7 +70,7 @@ export default function Footer() {
                 href={CHURCH_INFO.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-[#E84C1E] hover:text-white transition-all"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-[#D4521A] hover:text-white transition-all"
                 aria-label="Instagram IBK"
               >
                 {/* Instagram SVG */}
@@ -84,7 +84,7 @@ export default function Footer() {
                 href={CHURCH_INFO.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-[#E84C1E] hover:text-white transition-all"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-[#D4521A] hover:text-white transition-all"
                 aria-label="YouTube IBK"
               >
                 {/* YouTube SVG */}
@@ -126,7 +126,7 @@ export default function Footer() {
             © {currentYear} Igreja Batista Koinonia — Maceió, AL
           </p>
           <p className="text-white/40 text-xs font-body flex items-center gap-1">
-            Feito com <Heart size={10} className="text-[#E84C1E]" /> em Maceió
+            Feito com <Heart size={10} className="text-[#D4521A]" /> em Maceió
           </p>
         </div>
       </div>
