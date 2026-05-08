@@ -103,79 +103,72 @@ export default function AoVivoPlayer() {
         </div>
       </div>
 
-      {/* Player + Programação lado a lado */}
-      <div className="flex flex-col lg:flex-row gap-6 items-start">
+      {/* Player */}
+      <div className="w-full aspect-video bg-[#111] rounded overflow-hidden">
+        <iframe
+          key={src}
+          src={src}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="w-full h-full"
+          title="IBK Maceió"
+        />
+      </div>
 
-        {/* Player */}
-        <div className="w-full lg:flex-1 min-w-0">
-          <div className="w-full aspect-video bg-[#111] rounded overflow-hidden">
-            <iframe
-              key={src}
-              src={src}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
-              title="IBK Maceió"
-            />
-          </div>
+      {/* Info abaixo do player */}
+      <div className="mt-3 flex items-center justify-between gap-4">
+        {live ? (
+          <p className="text-white/30 font-body text-xs">
+            Sem transmissão ativa?{" "}
+            <button onClick={() => setLive(false)} className="text-[#D4521A] hover:underline">
+              Ver último culto
+            </button>
+          </p>
+        ) : (
+          <p className="text-white/30 font-body text-xs truncate">{lastVideo.title}</p>
+        )}
+        <a
+          href={CHURCH_INFO.youtube}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white/30 hover:text-white font-body text-xs transition-colors shrink-0"
+        >
+          Abrir no YouTube →
+        </a>
+      </div>
 
-          {/* Info abaixo do player */}
-          <div className="mt-3 flex items-center justify-between gap-4">
-            {live ? (
-              <p className="text-white/30 font-body text-xs">
-                Sem transmissão ativa?{" "}
-                <button onClick={() => setLive(false)} className="text-[#D4521A] hover:underline">
-                  Ver último culto
-                </button>
-              </p>
-            ) : (
-              <p className="text-white/30 font-body text-xs truncate">{lastVideo.title}</p>
-            )}
-            <a
-              href={CHURCH_INFO.youtube}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/30 hover:text-white font-body text-xs transition-colors shrink-0"
-            >
-              Abrir no YouTube →
-            </a>
-          </div>
+      {/* Programação */}
+      <div className="mt-10">
+        <h2 className="font-display font-800 text-xs uppercase tracking-widest text-white/40 mb-5">
+          Programação dos Cultos
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {PROGRAMACAO.flatMap((dia) =>
+            dia.cultos.map((culto, i) => {
+              const isToday = dia.dia === TODAY_PT;
+              return (
+                <div
+                  key={`${dia.dia}-${i}`}
+                  className={`p-5 border rounded transition-colors ${
+                    isToday
+                      ? "border-[#D4521A]/40 bg-[#D4521A]/8"
+                      : "border-white/8 bg-[#111]"
+                  }`}
+                >
+                  <span className={`font-display font-800 text-[10px] uppercase tracking-widest block mb-2 ${isToday ? "text-[#D4521A]" : "text-white/30"}`}>
+                    {dia.dia}
+                  </span>
+                  <span className="font-display font-700 text-white text-sm block mb-3">
+                    {culto.nome}
+                  </span>
+                  <span className={`font-display font-900 text-3xl block ${isToday ? "text-white/50" : "text-white/15"}`}>
+                    {culto.horario}
+                  </span>
+                </div>
+              );
+            })
+          )}
         </div>
-
-        {/* Programação lateral */}
-        <div className="w-full lg:w-80 shrink-0 lg:self-stretch flex flex-col">
-          <h2 className="font-display font-800 text-xs uppercase tracking-widest text-white/40 mb-4">
-            Programação dos Cultos
-          </h2>
-          <div className="flex flex-col border border-white/8 rounded overflow-hidden flex-1">
-            {PROGRAMACAO.flatMap((dia) =>
-              dia.cultos.map((culto, i) => {
-                const isToday = dia.dia === TODAY_PT;
-                return (
-                  <div
-                    key={`${dia.dia}-${i}`}
-                    className={`flex items-center justify-between px-5 py-4 border-b border-white/6 last:border-b-0 transition-colors ${
-                      isToday ? "bg-[#D4521A]/8" : "bg-[#111]"
-                    }`}
-                  >
-                    <div>
-                      <span className={`font-display font-800 text-[10px] uppercase tracking-widest block ${isToday ? "text-[#D4521A]" : "text-white/30"}`}>
-                        {dia.dia}
-                      </span>
-                      <span className="font-display font-700 text-white text-sm block mt-0.5">
-                        {culto.nome}
-                      </span>
-                    </div>
-                    <span className={`font-display font-900 text-2xl shrink-0 ml-4 ${isToday ? "text-white/60" : "text-white/20"}`}>
-                      {culto.horario}
-                    </span>
-                  </div>
-                );
-              })
-            )}
-          </div>
-        </div>
-
       </div>
     </section>
     <LiveDebugOverlay />
