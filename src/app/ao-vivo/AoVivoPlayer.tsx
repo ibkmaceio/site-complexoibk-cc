@@ -57,6 +57,8 @@ export default function AoVivoPlayer() {
       : `https://www.youtube-nocookie.com/embed/live_stream?channel=${CHANNEL_ID}&autoplay=1&rel=0`
     : `https://www.youtube-nocookie.com/embed/${lastVideo.id}?rel=0`;
 
+  const TODAY_PT = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"][new Date().getDay()];
+
   return (
     <>
     <section className="px-6 sm:px-10 lg:px-16 py-16 max-w-7xl mx-auto">
@@ -141,30 +143,35 @@ export default function AoVivoPlayer() {
         </div>
 
         {/* Programação lateral */}
-        <div className="w-full lg:w-72 shrink-0">
-          <h2 className="font-display font-800 text-[10px] uppercase tracking-widest text-white/40 mb-4">
+        <div className="w-full lg:w-80 shrink-0 lg:self-stretch flex flex-col">
+          <h2 className="font-display font-800 text-xs uppercase tracking-widest text-white/40 mb-4">
             Programação dos Cultos
           </h2>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col border border-white/8 rounded overflow-hidden flex-1">
             {PROGRAMACAO.flatMap((dia) =>
-              dia.cultos.map((culto, i) => (
-                <div
-                  key={`${dia.dia}-${i}`}
-                  className="flex items-center justify-between px-4 py-3 border border-white/8 rounded bg-[#111]"
-                >
-                  <div>
-                    <span className="font-display font-800 text-[10px] uppercase tracking-widest text-white/30 block">
-                      {dia.dia}
-                    </span>
-                    <span className="font-display font-700 text-white text-sm block mt-0.5">
-                      {culto.nome}
+              dia.cultos.map((culto, i) => {
+                const isToday = dia.dia === TODAY_PT;
+                return (
+                  <div
+                    key={`${dia.dia}-${i}`}
+                    className={`flex items-center justify-between px-5 py-4 border-b border-white/6 last:border-b-0 transition-colors ${
+                      isToday ? "bg-[#D4521A]/8" : "bg-[#111]"
+                    }`}
+                  >
+                    <div>
+                      <span className={`font-display font-800 text-[10px] uppercase tracking-widest block ${isToday ? "text-[#D4521A]" : "text-white/30"}`}>
+                        {dia.dia}
+                      </span>
+                      <span className="font-display font-700 text-white text-sm block mt-0.5">
+                        {culto.nome}
+                      </span>
+                    </div>
+                    <span className={`font-display font-900 text-2xl shrink-0 ml-4 ${isToday ? "text-white/60" : "text-white/20"}`}>
+                      {culto.horario}
                     </span>
                   </div>
-                  <span className="font-display font-900 text-xl text-white/25 shrink-0 ml-4">
-                    {culto.horario}
-                  </span>
-                </div>
-              ))
+                );
+              })
             )}
           </div>
         </div>
