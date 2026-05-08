@@ -9,28 +9,28 @@ export default function HeroVideo() {
     const video = videoRef.current;
     if (!video) return;
 
-    // iOS Safari ignora media attribute em <source> de <video> — detectar via JS
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    video.src = isMobile
+    const src = isMobile
       ? "/assets/video/hero-mobile.mp4"
       : "/assets/video/hero-desktop.mp4";
 
-    // muted via JS é necessário para iOS Safari respeitar autoplay
+    // muted via JS é obrigatório para autoplay no iOS Safari
     video.muted = true;
     video.playsInline = true;
 
-    let userPaused = false; // só respeita pause se foi o usuário (sem fallback aqui)
+    // Atribui src e chama load() explicitamente — Android Chrome não reinicia
+    // o buffer automaticamente quando src muda sem load().
+    video.src = src;
+    video.load();
+
+    let resumeTimer: ReturnType<typeof setTimeout> | null = null;
 
     const tryPlay = () => {
-      if (userPaused) return;
+      if (resumeTimer) clearTimeout(resumeTimer);
       const p = video.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
     };
 
-    // Tenta imediatamente — browser faz fila até ter dados suficientes
-    tryPlay();
-
-    // Triggers de retry: cobrem readyState insuficiente, conexão lenta, e bfcache
     const onCanPlay = () => tryPlay();
     const onLoadedData = () => tryPlay();
     const onLoadedMetadata = () => tryPlay();
@@ -38,32 +38,31 @@ export default function HeroVideo() {
     video.addEventListener("loadeddata", onLoadedData);
     video.addEventListener("loadedmetadata", onLoadedMetadata);
 
-    // Pause inesperado (low power, perda de foco breve) — auto-resume
+    // Pause inesperado (low-power mode, perda de foco) — auto-resume com
+    // delay de 300 ms para não brigar com o motor do browser no iOS.
     const onPause = () => {
-      // Heurística: se a página está visível e não foi ação do usuário,
-      // o pause veio do sistema. Tentamos retomar.
-      if (document.visibilityState === "visible" && !userPaused) {
-        // pequeno delay para não brigar com o próprio motor do browser
-        setTimeout(tryPlay, 50);
-      }
+      if (document.visibilityState !== "visible") return;
+      resumeTimer = setTimeout(tryPlay, 300);
     };
     video.addEventListener("pause", onPause);
 
-    // Retoma quando a aba volta a ficar visível
     const onVisibility = () => {
       if (document.visibilityState === "visible") tryPlay();
     };
     document.addEventListener("visibilitychange", onVisibility);
 
-    // bfcache: ao voltar via botão "voltar" do navegador, o vídeo é restaurado
-    // mas pode estar pausado e sem disparar canplay/loadeddata.
+    // bfcache: vídeo pode estar pausado ao voltar pelo botão "voltar"
     const onPageShow = (e: PageTransitionEvent) => {
-      if (e.persisted) tryPlay();
-      else tryPlay(); // navegação normal — também tenta (idempotente)
+      if (e.persisted) {
+        // re-carrega o src para garantir que o buffer foi retomado
+        video.load();
+      }
+      tryPlay();
     };
     window.addEventListener("pageshow", onPageShow);
 
     return () => {
+      if (resumeTimer) clearTimeout(resumeTimer);
       video.removeEventListener("canplay", onCanPlay);
       video.removeEventListener("loadeddata", onLoadedData);
       video.removeEventListener("loadedmetadata", onLoadedMetadata);
@@ -81,7 +80,7 @@ export default function HeroVideo() {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         disablePictureInPicture
         disableRemotePlayback
         aria-hidden="true"
