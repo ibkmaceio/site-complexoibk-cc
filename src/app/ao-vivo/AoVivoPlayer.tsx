@@ -101,65 +101,74 @@ export default function AoVivoPlayer() {
         </div>
       </div>
 
-      {/* Player — tamanho máximo */}
-      <div className="w-full aspect-video bg-[#111] rounded overflow-hidden">
-        <iframe
-          key={src}
-          src={src}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="w-full h-full"
-          title="IBK Maceió"
-        />
-      </div>
+      {/* Player + Programação lado a lado */}
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
 
-      {/* Info abaixo do player */}
-      <div className="mt-3 flex items-center justify-between gap-4">
-        {live ? (
-          <p className="text-white/30 font-body text-xs">
-            Sem transmissão ativa?{" "}
-            <button onClick={() => setLive(false)} className="text-[#D4521A] hover:underline">
-              Ver último culto
-            </button>
-          </p>
-        ) : (
-          <p className="text-white/30 font-body text-xs truncate">{lastVideo.title}</p>
-        )}
-        <a
-          href={CHURCH_INFO.youtube}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white/30 hover:text-white font-body text-xs transition-colors shrink-0"
-        >
-          Abrir no YouTube →
-        </a>
-      </div>
+        {/* Player */}
+        <div className="w-full lg:flex-1 min-w-0">
+          <div className="w-full aspect-video bg-[#111] rounded overflow-hidden">
+            <iframe
+              key={src}
+              src={src}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+              title="IBK Maceió"
+            />
+          </div>
 
-      {/* Programação */}
-      <div className="mt-14">
-        <h2 className="font-display font-800 text-xs uppercase tracking-widest text-white/40 mb-5">
-          Programação dos Cultos
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {PROGRAMACAO.flatMap((dia) =>
-            dia.cultos.map((culto, i) => (
-              <div
-                key={`${dia.dia}-${i}`}
-                className="p-5 border border-white/8 rounded bg-[#111]"
-              >
-                <span className="font-display font-800 text-[10px] uppercase tracking-widest text-white/30 block mb-2">
-                  {dia.dia}
-                </span>
-                <span className="font-display font-700 text-white text-sm block mb-1">
-                  {culto.nome}
-                </span>
-                <span className="font-display font-900 text-3xl text-white/15 block">
-                  {culto.horario}
-                </span>
-              </div>
-            ))
-          )}
+          {/* Info abaixo do player */}
+          <div className="mt-3 flex items-center justify-between gap-4">
+            {live ? (
+              <p className="text-white/30 font-body text-xs">
+                Sem transmissão ativa?{" "}
+                <button onClick={() => setLive(false)} className="text-[#D4521A] hover:underline">
+                  Ver último culto
+                </button>
+              </p>
+            ) : (
+              <p className="text-white/30 font-body text-xs truncate">{lastVideo.title}</p>
+            )}
+            <a
+              href={CHURCH_INFO.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/30 hover:text-white font-body text-xs transition-colors shrink-0"
+            >
+              Abrir no YouTube →
+            </a>
+          </div>
         </div>
+
+        {/* Programação lateral */}
+        <div className="w-full lg:w-72 shrink-0">
+          <h2 className="font-display font-800 text-[10px] uppercase tracking-widest text-white/40 mb-4">
+            Programação dos Cultos
+          </h2>
+          <div className="flex flex-col gap-2">
+            {PROGRAMACAO.flatMap((dia) =>
+              dia.cultos.map((culto, i) => (
+                <div
+                  key={`${dia.dia}-${i}`}
+                  className="flex items-center justify-between px-4 py-3 border border-white/8 rounded bg-[#111]"
+                >
+                  <div>
+                    <span className="font-display font-800 text-[10px] uppercase tracking-widest text-white/30 block">
+                      {dia.dia}
+                    </span>
+                    <span className="font-display font-700 text-white text-sm block mt-0.5">
+                      {culto.nome}
+                    </span>
+                  </div>
+                  <span className="font-display font-900 text-xl text-white/25 shrink-0 ml-4">
+                    {culto.horario}
+                  </span>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
       </div>
     </section>
     <LiveDebugOverlay />
