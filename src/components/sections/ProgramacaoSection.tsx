@@ -37,7 +37,7 @@ export default function ProgramacaoSection() {
           </div>
 
           {/* Cards */}
-          <div className="lg:col-span-2 grid grid-cols-1 gap-4">
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {PROGRAMACAO.flatMap((dia) =>
               dia.cultos.map((culto, i) => (
                 <FadeIn key={`${dia.dia}-${i}`} delay={i * 0.08}>
