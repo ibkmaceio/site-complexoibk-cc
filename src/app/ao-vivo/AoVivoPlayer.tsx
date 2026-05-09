@@ -57,8 +57,6 @@ export default function AoVivoPlayer() {
       : `https://www.youtube-nocookie.com/embed/live_stream?channel=${CHANNEL_ID}&autoplay=1&rel=0`
     : `https://www.youtube-nocookie.com/embed/${lastVideo.id}?rel=0`;
 
-  const TODAY_PT = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"][new Date().getDay()];
-
   return (
     <>
     <section className="px-6 sm:px-10 lg:px-16 py-16 max-w-7xl mx-auto">
@@ -144,29 +142,22 @@ export default function AoVivoPlayer() {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {PROGRAMACAO.flatMap((dia) =>
-            dia.cultos.map((culto, i) => {
-              const isToday = dia.dia === TODAY_PT;
-              return (
-                <div
-                  key={`${dia.dia}-${i}`}
-                  className={`p-5 border rounded transition-colors ${
-                    isToday
-                      ? "border-[#D4521A]/40 bg-[#D4521A]/8"
-                      : "border-white/8 bg-[#111]"
-                  }`}
-                >
-                  <span className={`font-display font-800 text-[10px] uppercase tracking-widest block mb-2 ${isToday ? "text-[#D4521A]" : "text-white/30"}`}>
-                    {dia.dia}
-                  </span>
-                  <span className="font-display font-700 text-white text-sm block mb-3">
-                    {culto.nome}
-                  </span>
-                  <span className={`font-display font-900 text-3xl block ${isToday ? "text-white/50" : "text-white/15"}`}>
-                    {culto.horario}
-                  </span>
-                </div>
-              );
-            })
+            dia.cultos.map((culto, i) => (
+              <div
+                key={`${dia.dia}-${i}`}
+                className="p-5 border border-white/8 rounded bg-[#111]"
+              >
+                <span className="font-display font-800 text-[10px] uppercase tracking-widest block mb-2 text-white/30">
+                  {dia.dia}
+                </span>
+                <span className="font-display font-700 text-white text-sm block mb-3">
+                  {culto.nome}
+                </span>
+                <span className="font-display font-900 text-3xl block text-white/15">
+                  {culto.horario}
+                </span>
+              </div>
+            ))
           )}
         </div>
       </div>
