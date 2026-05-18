@@ -43,7 +43,7 @@ function parseRSS(xml) {
         id,
         titulo: decode(title),
         data: published.split("T")[0],
-        thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+        thumbnail: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
       });
     }
   }
