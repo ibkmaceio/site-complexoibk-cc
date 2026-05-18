@@ -35,7 +35,7 @@ export default function HeroSection() {
             Você foi feito
             <br />
             para{" "}
-            <span className="font-serif italic text-white/90">pertencer.</span>
+            <span className="font-serif italic text-[#D4521A]">pertencer.</span>
           </h1>
 
           {/* Subline */}

@@ -26,7 +26,7 @@ export default function NoticiasSection() {
               </div>
               <h2 className="font-display font-black text-[clamp(2.5rem,5vw,4rem)] text-white leading-tight tracking-tight">
                 {COPY.novidades.headline}{" "}
-                <span className="font-serif italic font-normal text-white/65">da IBK</span>
+                <span className="font-serif italic font-normal text-[#D4521A]">da IBK</span>
               </h2>
             </div>
           </FadeIn>

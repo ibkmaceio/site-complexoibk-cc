@@ -26,7 +26,7 @@ export default function TemaMesSection() {
             <FadeIn delay={0.08}>
               <h2 className="font-display font-black text-[clamp(2.5rem,5vw,4rem)] text-white leading-[0.95] tracking-tight mb-10">
                 {COPY.tema.linha1}<br />
-                <span className="font-serif italic text-white/90">{COPY.tema.linha2}</span>
+                <span className="font-serif italic text-[#D4521A]">{COPY.tema.linha2}</span>
               </h2>
             </FadeIn>
 

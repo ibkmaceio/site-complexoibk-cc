@@ -30,7 +30,7 @@ export default function SobreSection({ asH1 = false }: SobreSectionProps) {
           <FadeIn delay={0.1}>
             <Heading className="font-display font-black text-[clamp(2.2rem,4.5vw,3.8rem)] text-white leading-[1.05] tracking-tight mb-8">
               Uma comunidade que{" "}
-              <span className="font-serif italic text-white/90">transforma vidas</span>{" "}
+              <span className="font-serif italic text-[#D4521A]">transforma vidas</span>{" "}
               em Maceió.
             </Heading>
           </FadeIn>

@@ -34,7 +34,7 @@ export default function PregacoesSection() {
               </h2>
               <p className="text-white/65 font-body text-sm mt-2">
                 {COPY.pregacoes.subline}{" "}
-                <span className="font-serif italic text-white/65">ouça agora.</span>
+                <span className="font-serif italic text-[#D4521A]">ouça agora.</span>
               </p>
             </div>
           </FadeIn>
