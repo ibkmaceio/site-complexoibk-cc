@@ -24,12 +24,16 @@ export default function HeroVideo() {
     video.load();
 
     let resumeTimer: ReturnType<typeof setTimeout> | null = null;
+    let isPlaying = false;
 
     const tryPlay = () => {
       if (resumeTimer) clearTimeout(resumeTimer);
       const p = video.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
     };
+
+    const onPlaying = () => { isPlaying = true; };
+    video.addEventListener("playing", onPlaying);
 
     const onCanPlay = () => tryPlay();
     const onLoadedData = () => tryPlay();
@@ -61,14 +65,31 @@ export default function HeroVideo() {
     };
     window.addEventListener("pageshow", onPageShow);
 
+    // Fallback para iOS: quando o usuário volta de /ao-vivo após interagir com
+    // o player do YouTube, o iOS mantém uma audio session ativa que bloqueia
+    // o autoplay silenciosamente (play() rejeita sem disparar erro visível).
+    // Se o vídeo não entrou em "playing" em 1.5s, aguarda o primeiro gesto do
+    // usuário — iOS sempre permite mídia muted em resposta a interação.
+    const onFirstInteraction = () => { if (!isPlaying) tryPlay(); };
+    const fallbackTimer = setTimeout(() => {
+      if (!isPlaying) {
+        document.addEventListener("touchstart", onFirstInteraction, { passive: true, once: true });
+        document.addEventListener("click", onFirstInteraction, { once: true });
+      }
+    }, 1500);
+
     return () => {
       if (resumeTimer) clearTimeout(resumeTimer);
+      clearTimeout(fallbackTimer);
+      video.removeEventListener("playing", onPlaying);
       video.removeEventListener("canplay", onCanPlay);
       video.removeEventListener("loadeddata", onLoadedData);
       video.removeEventListener("loadedmetadata", onLoadedMetadata);
       video.removeEventListener("pause", onPause);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pageshow", onPageShow);
+      document.removeEventListener("touchstart", onFirstInteraction);
+      document.removeEventListener("click", onFirstInteraction);
     };
   }, []);
 
