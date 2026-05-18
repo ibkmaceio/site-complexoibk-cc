@@ -152,7 +152,7 @@ export default function VideosSection() {
                   >
                     <div className="relative w-32 shrink-0 aspect-video bg-ibk-dark-card rounded overflow-hidden">
                       <img
-                        src={v.thumbnail}
+                        src={v.thumbnail.replace("maxresdefault.jpg", "mqdefault.jpg")}
                         alt={v.titulo}
                         loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-active:scale-110"
