@@ -9,10 +9,7 @@ export default function HeroVideo() {
     const video = videoRef.current;
     if (!video) return;
 
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const src = isMobile
-      ? "/assets/video/hero-mobile.mp4"
-      : "/assets/video/hero-desktop.mp4";
+    const src = "/assets/video/hero-desktop.mp4";
 
     // muted via JS é obrigatório para autoplay no iOS Safari
     video.muted = true;

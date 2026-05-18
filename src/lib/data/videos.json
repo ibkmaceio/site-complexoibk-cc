@@ -1,69 +1,75 @@
 {
   "ibk": [
     {
-      "id": "6YtxYm27ezA",
-      "titulo": "Culto da Palavra | 06.05",
-      "data": "2026-05-07",
-      "thumbnail": "https://i.ytimg.com/vi/6YtxYm27ezA/hqdefault.jpg"
+      "id": "IjzjndubTdg",
+      "titulo": "Culto Doutrinário | 17.05",
+      "data": "2026-05-18",
+      "thumbnail": "https://i.ytimg.com/vi/IjzjndubTdg/hqdefault.jpg"
     },
     {
-      "id": "KjDINUwuk3Q",
-      "titulo": "Culto Doutrinário | 03.05",
-      "data": "2026-05-04",
-      "thumbnail": "https://i.ytimg.com/vi/KjDINUwuk3Q/hqdefault.jpg"
+      "id": "TME-m8yjBsY",
+      "titulo": "Culto da Família | 17.05",
+      "data": "2026-05-17",
+      "thumbnail": "https://i.ytimg.com/vi/TME-m8yjBsY/hqdefault.jpg"
     },
     {
-      "id": "QbQbuvqHDz4",
-      "titulo": "Ceia do Senhor | 03.05",
-      "data": "2026-05-03",
-      "thumbnail": "https://i.ytimg.com/vi/QbQbuvqHDz4/hqdefault.jpg"
+      "id": "fYtc-hhWjPM",
+      "titulo": "Traição, perdão e uma família restaurada por Deus | IBKAST EP 05",
+      "data": "2026-05-15",
+      "thumbnail": "https://i.ytimg.com/vi/fYtc-hhWjPM/hqdefault.jpg"
     },
     {
-      "id": "pKg5fFLBrNw",
-      "titulo": "Culto da Palavra | 29.04",
-      "data": "2026-04-30",
-      "thumbnail": "https://i.ytimg.com/vi/pKg5fFLBrNw/hqdefault.jpg"
+      "id": "DInfA4mrjac",
+      "titulo": "Conferência da Família | 13.05",
+      "data": "2026-05-14",
+      "thumbnail": "https://i.ytimg.com/vi/DInfA4mrjac/hqdefault.jpg"
     },
     {
-      "id": "-yw9bX8KIvI",
-      "titulo": "Consagração Pastoral | 28.04",
-      "data": "2026-04-29",
-      "thumbnail": "https://i.ytimg.com/vi/-yw9bX8KIvI/hqdefault.jpg"
+      "id": "zRRT0fZ7HUc",
+      "titulo": "Culto Doutrinário | 10.05",
+      "data": "2026-05-11",
+      "thumbnail": "https://i.ytimg.com/vi/zRRT0fZ7HUc/hqdefault.jpg"
     }
   ],
   "pedro": [
     {
-      "id": "1aXA47eG1-4",
-      "titulo": "Humildade e honra Lc 14.11",
-      "data": "2026-05-08",
-      "thumbnail": "https://i.ytimg.com/vi/1aXA47eG1-4/hqdefault.jpg"
+      "id": "aEVYkitZ544",
+      "titulo": "Ai de quem escandaliza Lc 17.1,2",
+      "data": "2026-05-18",
+      "thumbnail": "https://i.ytimg.com/vi/aEVYkitZ544/hqdefault.jpg"
     },
     {
-      "id": "xQiIGNKmlNU",
-      "titulo": "Rico com Deus Lc 12.15",
-      "data": "2026-05-07",
-      "thumbnail": "https://i.ytimg.com/vi/xQiIGNKmlNU/hqdefault.jpg"
+      "id": "gY-98-Eiuuc",
+      "titulo": "Será que estou certo? Mt 7.5",
+      "data": "2026-05-15",
+      "thumbnail": "https://i.ytimg.com/vi/gY-98-Eiuuc/hqdefault.jpg"
     },
     {
-      "id": "P17RcQbNihM",
-      "titulo": "Você tem valor Lc 12.7",
-      "data": "2026-05-06",
-      "thumbnail": "https://i.ytimg.com/vi/P17RcQbNihM/hqdefault.jpg"
+      "id": "y2OnTikPDCQ",
+      "titulo": "Filho celebrado Lc 15.22-24",
+      "data": "2026-05-14",
+      "thumbnail": "https://i.ytimg.com/vi/y2OnTikPDCQ/hqdefault.jpg"
     },
     {
-      "id": "DFQcg7wwBKw",
-      "titulo": "Não existem segredos! Lc 12.2",
-      "data": "2026-05-05",
-      "thumbnail": "https://i.ytimg.com/vi/DFQcg7wwBKw/hqdefault.jpg"
+      "id": "m8_Fk2Ej8g8",
+      "titulo": "Filho abraçado Lc 15.20",
+      "data": "2026-05-13",
+      "thumbnail": "https://i.ytimg.com/vi/m8_Fk2Ej8g8/hqdefault.jpg"
     },
     {
-      "id": "WJNCbjIs9x4",
-      "titulo": "Repreensão enfática Lc 11.42",
-      "data": "2026-05-04",
-      "thumbnail": "https://i.ytimg.com/vi/WJNCbjIs9x4/hqdefault.jpg"
+      "id": "XFRCl7AXKxE",
+      "titulo": "Filho Convertidos Lc 15.17-19",
+      "data": "2026-05-12",
+      "thumbnail": "https://i.ytimg.com/vi/XFRCl7AXKxE/hqdefault.jpg"
     }
   ],
   "podcasts": [
+    {
+      "id": "fYtc-hhWjPM",
+      "titulo": "Traição, perdão e uma família restaurada por Deus | IBKAST EP 05",
+      "data": "2026-05-15",
+      "thumbnail": "https://i.ytimg.com/vi/fYtc-hhWjPM/hqdefault.jpg"
+    },
     {
       "id": "VOOwK7csjxM",
       "titulo": "O que fazer quando Deus está em silêncio | IBKAST EP 04",
@@ -87,13 +93,7 @@
       "titulo": "Casamento, igreja e chamado pastoral | IBKAST EP 02",
       "data": "2026-03-13",
       "thumbnail": "https://i.ytimg.com/vi/3_DNtAuFWHQ/hqdefault.jpg"
-    },
-    {
-      "id": "sCk__3GN-lU",
-      "titulo": "Os perigos da liderança sem vida com Deus | Pr. Pedro Luz e Pr. Raphael Abdalla - Ep.01",
-      "data": "2026-03-06",
-      "thumbnail": "https://i.ytimg.com/vi/sCk__3GN-lU/hqdefault.jpg"
     }
   ],
-  "updatedAt": "2026-05-08T13:26:28.210Z"
+  "updatedAt": "2026-05-18T23:18:45.462Z"
 }
